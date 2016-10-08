@@ -39,6 +39,15 @@
     <ClInclude Include="Pokemon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Bulbasaur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Charmander.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pikachu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project1.cpp">
@@ -54,6 +63,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pokemon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bulbasaur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Charmander.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pikachu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

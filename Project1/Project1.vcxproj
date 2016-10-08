@@ -181,8 +181,11 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bulbasaur.h" />
+    <ClInclude Include="Charmander.h" />
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Pikachu.h" />
     <ClInclude Include="Pokemon.h" />
     <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
@@ -190,8 +193,11 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bulbasaur.cpp" />
+    <ClCompile Include="Charmander.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Pikachu.cpp" />
     <ClCompile Include="Pokemon.cpp" />
     <ClCompile Include="Project1.cpp" />
     <ClCompile Include="stdafx.cpp">

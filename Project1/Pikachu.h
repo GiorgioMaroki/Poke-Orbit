@@ -1,5 +1,5 @@
 /**
- * \file Pokemon.h
+ * \file Pikachu.h
  *
  * \author Giorgio Maroki
  *
@@ -7,10 +7,10 @@
  */
 
 #pragma once
-class CPokemon
+class CPikachu
 {
 public:
-	CPokemon();
-	virtual ~CPokemon();
+	CPikachu();
+	virtual ~CPikachu();
 };
 
