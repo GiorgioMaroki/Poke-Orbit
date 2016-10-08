@@ -5,12 +5,27 @@
  *
  * 
  */
-
 #pragma once
-class CBulbasaur
+#include <string>
+#include "Pokemon.h"
+
+ /** Class that describes a chicken.
+ */
+class CBulbasaur : public CPokemon
 {
 public:
 	CBulbasaur();
 	virtual ~CBulbasaur();
-};
 
+
+	void ObtainBulbasaurInformation();
+
+	/// This displays the animal information
+	void DisplayPokemon();
+
+
+private:
+
+
+
+};

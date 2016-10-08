@@ -6,11 +6,12 @@
  * 
  */
 
-#pragma once
 class CPokemon
 {
 public:
 	CPokemon();
 	virtual ~CPokemon();
+	/** Display an animal. */
+	virtual void DisplayAnimal() {}
 };
 

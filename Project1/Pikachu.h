@@ -12,5 +12,7 @@ class CPikachu
 public:
 	CPikachu();
 	virtual ~CPikachu();
+	void ObtainCharmanderInformation();
+	void DisplayPokemon();
 };
 
