@@ -51,4 +51,7 @@
 #endif
 #endif
 
+#include <gdiplus.h>
+#pragma comment(lib, "gdiplus.lib")
+
 
