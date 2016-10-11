@@ -184,7 +184,9 @@
     <ClInclude Include="Bulbasaur.h" />
     <ClInclude Include="Charmander.h" />
     <ClInclude Include="ChildView.h" />
+    <ClInclude Include="DoubleBufferDC.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="Orbit.h" />
     <ClInclude Include="Pikachu.h" />
     <ClInclude Include="Pokemon.h" />
     <ClInclude Include="Project1.h" />
@@ -197,6 +199,7 @@
     <ClCompile Include="Charmander.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="Orbit.cpp" />
     <ClCompile Include="Pikachu.cpp" />
     <ClCompile Include="Pokemon.cpp" />
     <ClCompile Include="Project1.cpp" />
@@ -220,4 +223,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="Project1.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

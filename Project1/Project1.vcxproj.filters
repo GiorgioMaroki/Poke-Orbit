@@ -48,6 +48,12 @@
     <ClInclude Include="Pikachu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Orbit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DoubleBufferDC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project1.cpp">
@@ -72,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Pikachu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Orbit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

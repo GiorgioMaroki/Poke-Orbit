@@ -1,6 +1,6 @@
 // ChildView.h : interface of the CChildView class
 //
-
+#include "Orbit.h"
 
 #pragma once
 
@@ -31,5 +31,9 @@ public:
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+	/// An object that describes our orbit
+	COrbit  mOrbit;
+public:
+	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 };
 
