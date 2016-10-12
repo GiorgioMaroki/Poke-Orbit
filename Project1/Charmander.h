@@ -6,8 +6,12 @@
  * 
  */
 
-
 #pragma once
+
+
+/**
+ * Class about the charmander pokemoon
+ */
 class CCharmander
 {
 public:

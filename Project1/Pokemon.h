@@ -6,6 +6,10 @@
  * 
  */
 
+
+/**
+ * Base class for the pokemon
+ */
 class CPokemon
 {
 public:

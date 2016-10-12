@@ -7,6 +7,12 @@
 */
 
 #pragma once
+
+
+
+/**
+ * Class that defines the orbit and the black background
+ */
 class COrbit
 {
 public:

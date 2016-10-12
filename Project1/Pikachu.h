@@ -7,6 +7,12 @@
  */
 
 #pragma once
+
+
+
+ /**
+ * Class about the Pikachu pokemoon
+ */
 class CPikachu
 {
 public:
