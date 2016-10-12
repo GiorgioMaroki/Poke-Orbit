@@ -13,7 +13,5 @@ class CCharmander
 public:
 	CCharmander();
 	virtual ~CCharmander();
-	void ObtainCharmanderInformation();
-	void DisplayPokemon();
 };
 

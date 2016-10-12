@@ -17,13 +17,6 @@ public:
 	CBulbasaur();
 	virtual ~CBulbasaur();
 
-
-	void ObtainBulbasaurInformation();
-
-	/// This displays the animal information
-	void DisplayPokemon();
-
-
 private:
 
 
