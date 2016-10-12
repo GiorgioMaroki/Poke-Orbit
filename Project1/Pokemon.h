@@ -16,5 +16,7 @@ public:
 	CPokemon();
 	virtual ~CPokemon();
 
+private:
+
 };
 

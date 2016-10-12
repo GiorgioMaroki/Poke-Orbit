@@ -18,7 +18,7 @@ public:
 	virtual ~CBulbasaur();
 
 private:
-
+	long const mVelocity = 10;
 
 
 };

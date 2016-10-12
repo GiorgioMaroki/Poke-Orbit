@@ -17,5 +17,8 @@ class CCharmander
 public:
 	CCharmander();
 	virtual ~CCharmander();
+
+private:
+	long const mVelocity = 30;
 };
 

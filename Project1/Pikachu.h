@@ -19,5 +19,8 @@ public:
 	CPikachu();
 	virtual ~CPikachu();
 
+private:
+	long const mVelocity = 50;
+
 };
 
