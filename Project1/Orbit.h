@@ -1,17 +1,23 @@
 /**
-* \file Orbit.h
-*
-* \author Noah Hirvela
-*
-*
-*/
+ * \file Orbit.h
+ *
+ * \author Noah Hirvela
+ *
+ *
+ */
 
 #pragma once
+#include <memory>
+
+#include "Emission.h"
+
 class COrbit
 {
 public:
 	COrbit();
 	virtual ~COrbit();
+
+	/// Draw the orbit
 	void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height);
 
 private:
@@ -23,5 +29,7 @@ private:
 
 	/// Radius of the playing read in virtual pixels
 	const static int Radius = 500;
-};
 
+	/// All of the emissions in our orbit
+	std::vector<std::shared_ptr<CEmission> > mEmissions;
+};
