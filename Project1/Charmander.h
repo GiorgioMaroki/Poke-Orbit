@@ -6,14 +6,19 @@
  * 
  */
 
-
 #pragma once
+
+
+/**
+ * Class about the charmander pokemoon
+ */
 class CCharmander
 {
 public:
 	CCharmander();
 	virtual ~CCharmander();
-	void ObtainCharmanderInformation();
-	void DisplayPokemon();
+
+private:
+	long const mVelocity = 30;
 };
 

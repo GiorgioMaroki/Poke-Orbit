@@ -123,6 +123,9 @@ int CProject1App::ExitInstance()
 
 // CAboutDlg dialog used for App About
 
+/**
+ * Class that implements about dialog
+ */
 class CAboutDlg : public CDialogEx
 {
 public:
@@ -133,8 +136,10 @@ public:
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
+
 protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+	/// DDX/DDV support
+	virtual void DoDataExchange(CDataExchange* pDX);    
 
 // Implementation
 protected:

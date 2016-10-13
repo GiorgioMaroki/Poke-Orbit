@@ -25,23 +25,3 @@ CPikachu::CPikachu()
 CPikachu::~CPikachu()
 {
 }
-
-
-/** Obtain information from the user about this Bulbasaur.
-*
-* Asks the user for the information that describes a Bulbasaur.
-*/
-void CPikachu::ObtainCharmanderInformation()
-{
-
-}
-
-
-/**
-* Display information about this Bulbasaur.
-*/
-void CPikachu::DisplayPokemon()
-{
-
-
-}

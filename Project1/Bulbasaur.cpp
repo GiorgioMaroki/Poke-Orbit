@@ -27,22 +27,3 @@ CBulbasaur::~CBulbasaur()
 {
 }
 
-
-/** Obtain information from the user about this Bulbasaur.
-*
-* Asks the user for the information that describes a Bulbasaur.
-*/
-void CBulbasaur::ObtainBulbasaurInformation()
-{
-
-}
-
-
-/**
-* Display information about this Bulbasaur.
-*/
-void CBulbasaur::DisplayPokemon() 
-{
-
-
-}

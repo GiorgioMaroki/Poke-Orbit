@@ -14,6 +14,10 @@
 // See Project1.cpp for the implementation of this class
 //
 
+
+/**
+ * Project1 App Dervied from CWinApp
+ */
 class CProject1App : public CWinApp
 {
 public:
@@ -22,17 +26,21 @@ public:
 
 // Overrides
 public:
+	/// Virtual bool function for the initial instance
 	virtual BOOL InitInstance();
+	/// Virtual int function for the exit instance
 	virtual int ExitInstance();
 
 // Implementation
-
 public:
+	/// OnAppAbout for GDI+
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
 
 private:
+	/// Private member to import GDI plus
 	Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+	/// Private member to import GDI plus
 	ULONG_PTR gdiplusToken;
 };
 

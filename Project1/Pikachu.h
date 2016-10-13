@@ -7,12 +7,20 @@
  */
 
 #pragma once
+
+
+
+ /**
+ * Class about the Pikachu pokemoon
+ */
 class CPikachu
 {
 public:
 	CPikachu();
 	virtual ~CPikachu();
-	void ObtainCharmanderInformation();
-	void DisplayPokemon();
+
+private:
+	long const mVelocity = 50;
+
 };
 
