@@ -67,3 +67,12 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 		emission->Draw(graphics);
 	}
 }
+
+/**
+ * Updates orbit
+ *
+ * \param elapsed time elapsed
+ */
+void COrbit::Update(double elapsed)
+{
+}

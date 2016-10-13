@@ -9,7 +9,7 @@
 #include <string>
 #include "Pokemon.h"
 
- /** Class that describes a chicken.
+ /** Class that describes a bulbasaur.
  */
 class CBulbasaur : public CPokemon
 {
@@ -17,15 +17,8 @@ public:
 	CBulbasaur();
 	virtual ~CBulbasaur();
 
-
-	void ObtainBulbasaurInformation();
-
-	/// This displays the animal information
-	void DisplayPokemon();
-
-
 private:
-
+	long const mVelocity = 10;
 
 
 };

@@ -6,12 +6,17 @@
  * 
  */
 
+
+/**
+ * Base class for the pokemon
+ */
 class CPokemon
 {
 public:
 	CPokemon();
 	virtual ~CPokemon();
-	/** Display an animal. */
-	virtual void DisplayAnimal() {}
+
+private:
+
 };
 

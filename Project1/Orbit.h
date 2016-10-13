@@ -1,24 +1,32 @@
 /**
- * \file Orbit.h
- *
- * \author Noah Hirvela
- *
- *
- */
+* \file Orbit.h
+*
+* \author Noah Hirvela
+*
+*
+*/
 
 #pragma once
+#include "stdafx.h"
 #include <memory>
+#include <vector>
 
 #include "Emission.h"
 
+/**
+ * Class that defines the orbit and the black background
+ */
 class COrbit
 {
 public:
 	COrbit();
 	virtual ~COrbit();
-
-	/// Draw the orbit
+	
+	/// Draws orbit
 	void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height);
+
+	/// Updates orbit
+	void COrbit::Update(double elapsed);
 
 private:
 	/// Playing area width in virtual pixels
@@ -33,3 +41,4 @@ private:
 	/// All of the emissions in our orbit
 	std::vector<std::shared_ptr<CEmission> > mEmissions;
 };
+
