@@ -19,6 +19,7 @@ COrbit::COrbit()
 	//std::shared_ptr<CEmission> emission(this, &RandomImageName);
 	auto emission = std::make_shared<CEmission>(this, RandomImageName);
 	mEmissions.push_back(emission);
+
 }
 
 
@@ -55,11 +56,20 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	graphics->ScaleTransform(scale, scale);
 	
 	// Draw the Trainer
-	//graphics->DrawImage(TrainerImageName (can't be imagepath), 0, 0, asdfdvc);
+	auto trainerImage = std::unique_ptr<Bitmap>(Bitmap::FromFile(TrainerImageName.c_str()));
+	double tWidth = trainerImage->GetWidth();
+	double tHeight = trainerImage->GetHeight();
+		graphics->DrawImage(trainerImage.get(),
+		float(0 - tWidth / 2), float(0 - tHeight / 2),
+		(float)tWidth, (float)tHeight);
 
 	// Draw the Orbit
 	Pen pen(Color::Green);
 	graphics->DrawArc(&pen, -radius, -radius, radius * 2, radius * 2, 0, 360);
+
+	auto AshEmission = std::make_shared<CEmission>(this, TrainerImageName);
+
+	
 
 	// Draw the Emissions
 	for (auto emission : mEmissions)
