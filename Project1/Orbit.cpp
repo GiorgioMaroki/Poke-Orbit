@@ -75,4 +75,8 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
  */
 void COrbit::Update(double elapsed)
 {
+	for (auto emission : mEmissions)
+	{
+		emission->Update(elapsed);
+	}
 }

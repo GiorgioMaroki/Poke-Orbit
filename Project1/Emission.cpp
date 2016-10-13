@@ -24,10 +24,10 @@ CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 	}
 
 	mOrbit = orbit;
-	mRotation = 5;
+	mAngularDisplacement = 5;
 
 	// Randomly set angular velocity (1 - 4)
-	mAngularVelocity = 10; // rand() % 4 + 1;
+	mAngularVelocity = 1; // rand() % 4 + 1;
 
 	// Randomly set distance(10 - 90)
 	mRadius = 300; //rand() & 81 + 10;
@@ -90,4 +90,15 @@ bool CEmission::HitTest(double x, double y)
 	else {
 		return true;
 	}
+}
+
+
+/**
+ * Update emission animation
+ *
+ * \param elapsed time elapsed
+ */
+void CEmission::Update(double elapsed)
+{
+	mAngularDisplacement += mAngularVelocity * elapsed;
 }

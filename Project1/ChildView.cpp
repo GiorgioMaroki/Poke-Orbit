@@ -15,6 +15,8 @@ using namespace::Gdiplus;
 #define new DEBUG_NEW
 #endif
 
+/// Frame duration in milliseconds
+const int FrameDuration = 10;
 
 // CChildView
 
@@ -54,23 +56,39 @@ void CChildView::OnPaint()
 	CPaintDC paintDC(this);
 	CDoubleBufferDC dc(&paintDC); // device context for painting
 	Graphics graphics(dc.m_hDC);
-
+	
 	CRect rect;
 	GetClientRect(&rect);
-
 	mOrbit.OnDraw(&graphics, rect.Width(), rect.Height());
+
+	if (mFirstDraw)
+	{
+		mFirstDraw = false;
+		SetTimer(1, FrameDuration, nullptr);
+
+		/*
+		* Initialize the elapsed time system
+		*/
+		LARGE_INTEGER time, freq;
+		QueryPerformanceCounter(&time);
+		QueryPerformanceFrequency(&freq);
+
+		mLastTime = time.QuadPart;
+		mTimeFreq = double(freq.QuadPart);
+	}
 
 	/*
 	* Compute the elapsed time since the last draw
 	*/
-	/*
 	LARGE_INTEGER time;
 	QueryPerformanceCounter(&time);
 	long long diff = time.QuadPart - mLastTime;
 	double elapsed = double(diff) / mTimeFreq;
 	mLastTime = time.QuadPart;
+
+	// Update animations
 	mOrbit.Update(elapsed);
-	*/
+	Invalidate();
 }
 
 

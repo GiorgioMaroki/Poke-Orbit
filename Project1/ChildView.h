@@ -42,5 +42,6 @@ public:
 private:
 	long long mLastTime;    ///< Last time we read the timer
 	double mTimeFreq;       ///< Rate the timer updates
+	bool mFirstDraw = true;	///< Whether this is the first draw
 };
 

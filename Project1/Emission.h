@@ -10,6 +10,7 @@
 #include "stdafx.h"
 #include <memory>
 #include <random>
+#include <string>
 
 // Forward referrence
 class COrbit;
@@ -32,39 +33,42 @@ public:
 	/// Virtual destructor
 	virtual ~CEmission() {};
 
-	/**
-	 * The X location of the item
-	 *
-	 * \returns X location in pixels
-	 */
-	double GetX() const { return mRadius * cos(mRotation); }
-
-	/**
-	 * The Y location of the item
-	 *
-	 * \returns Y location in pixels
-	 */
-	double GetY() const { return mRadius * -sin(mRotation); }
-
 	/// Draw this item
 	virtual void Draw(Gdiplus::Graphics *graphics);
 
 	/// Test this emission to see if it has been clicked on
 	virtual bool HitTest(double x, double y);
 
+	/// Updates emission animation
+	void Update(double elapsed);
+
+	/**
+	* The X location of the item
+	*
+	* \returns X location in pixels
+	*/
+	double GetX() const { return mRadius * cos(mAngularDisplacement); }
+
+	/**
+	* The Y location of the item
+	*
+	* \returns Y location in pixels
+	*/
+	double GetY() const { return mRadius * -sin(mAngularDisplacement); }
+
 private:
 	/// The orbit this emission is contained in
 	COrbit *mOrbit;
 
-	/// Angular Velocity
-	double mAngularVelocity;
+	/// Path to image representation
+	std::unique_ptr<Gdiplus::Bitmap> mEmissionImage;
 
 	/// Displacement from center
 	double mRadius;
 
-	/// Current rotation (radians)
-	double mRotation;
+	/// Current angular displacement (radians)
+	double mAngularDisplacement;
 
-	/// Path to image representation
-	std::unique_ptr<Gdiplus::Bitmap> mEmissionImage;
+	/// Angular Velocity
+	double mAngularVelocity;
 };
