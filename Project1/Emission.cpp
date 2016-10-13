@@ -11,7 +11,9 @@ using namespace Gdiplus;
 
  /**
   * Image path constructor
-  * \param imagePath
+  *
+  * \param orbit pointer to greater orbit
+  * \param filename path to image
   */
 CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 {

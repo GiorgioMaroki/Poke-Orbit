@@ -12,7 +12,7 @@
 #include <random>
 #include <string>
 
-// Forward referrence
+// Forward reference
 class COrbit;
 
 /**

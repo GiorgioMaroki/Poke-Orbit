@@ -3,7 +3,7 @@
 *
 * \author Noah Hirvela
 *
-*
+* Orbit Class.
 */
 
 #pragma once
@@ -14,7 +14,7 @@
 #include "Emission.h"
 
 /**
- * Class that defines the orbit and the black background
+ * Class that defines the PokeOrbit
  */
 class COrbit
 {

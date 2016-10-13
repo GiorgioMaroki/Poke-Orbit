@@ -8,7 +8,6 @@
 
 #pragma once
 
-
 /**
  * Class about the charmander pokemoon
  */
@@ -19,6 +18,6 @@ public:
 	virtual ~CCharmander();
 
 private:
+	/// Charmander velocity
 	long const mVelocity = 30;
 };
-

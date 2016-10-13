@@ -8,8 +8,6 @@
 
 #pragma once
 
-
-
  /**
  * Class about the Pikachu pokemoon
  */
@@ -20,7 +18,6 @@ public:
 	virtual ~CPikachu();
 
 private:
+	/// Pikachu velocity
 	long const mVelocity = 50;
-
 };
-

@@ -9,8 +9,9 @@
 #include <string>
 #include "Pokemon.h"
 
- /** Class that describes a bulbasaur.
- */
+ /**
+  * Class that describes a bulbasaur.
+  */
 class CBulbasaur : public CPokemon
 {
 public:
@@ -18,7 +19,6 @@ public:
 	virtual ~CBulbasaur();
 
 private:
+	/// Bulbasaur velocity
 	long const mVelocity = 10;
-
-
 };
