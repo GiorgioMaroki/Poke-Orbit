@@ -9,7 +9,7 @@
 #include <string>
 #include "Pokemon.h"
 
- /** Class that describes a chicken.
+ /** Class that describes a bulbasaur.
  */
 class CBulbasaur : public CPokemon
 {

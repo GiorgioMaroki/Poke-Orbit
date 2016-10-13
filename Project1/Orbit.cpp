@@ -4,9 +4,12 @@
 #include "Bulbasaur.h"
 #include "Charmander.h"
 #include <gdiplus.h>
-
+#include <stdio.h>  
+#include <math.h>  
 
 using namespace Gdiplus;
+
+#define PI 3.14159265
 
 COrbit::COrbit()
 {
@@ -50,4 +53,18 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	//
 	Pen pen(Color::Green);
 	graphics->DrawArc(&pen, -radius, -radius, radius * 2, radius * 2, 0, 360);
+}
+
+void COrbit::Update(double elapsed)
+{
+	
+	/*
+	double PokeAngle = atan2(y, x) * 180 / PI;
+	double PokeSin = sin(PokeAngle);
+	double PokeCos = cos(PokeAngle);
+
+	//needs to be multiplied by rads per sec and time elapsed
+	double newX = PokeCos * x + PokeSin * y;
+	double newY = -PokeSin * x + PokeCos * y;
+	*/
 }

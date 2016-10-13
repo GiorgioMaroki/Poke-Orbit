@@ -59,6 +59,18 @@ void CChildView::OnPaint()
 	GetClientRect(&rect);
 
 	mOrbit.OnDraw(&graphics, rect.Width(), rect.Height());
+
+	/*
+	* Compute the elapsed time since the last draw
+	*/
+	/*
+	LARGE_INTEGER time;
+	QueryPerformanceCounter(&time);
+	long long diff = time.QuadPart - mLastTime;
+	double elapsed = double(diff) / mTimeFreq;
+	mLastTime = time.QuadPart;
+	mOrbit.Update(elapsed);
+	*/
 }
 
 

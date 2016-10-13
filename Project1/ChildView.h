@@ -35,5 +35,8 @@ protected:
 	COrbit  mOrbit;
 public:
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
+private:
+	long long mLastTime;    ///< Last time we read the timer
+	double mTimeFreq;       ///< Rate the timer updates
 };
 

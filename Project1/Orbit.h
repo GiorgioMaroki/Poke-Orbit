@@ -13,7 +13,7 @@ public:
 	COrbit();
 	virtual ~COrbit();
 	void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height);
-
+	void COrbit::Update(double elapsed);
 private:
 	/// Playing area width in virtual pixels
 	const static int Width = 1400;
