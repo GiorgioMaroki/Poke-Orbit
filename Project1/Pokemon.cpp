@@ -6,9 +6,12 @@
 
 #include "stdafx.h"
 #include "Pokemon.h"
+#include "Orbit.h"
+#include "Item.h"
 
 
-CPokemon::CPokemon()
+CPokemon::CPokemon(COrbit *orbit, const std::wstring & filename)
+	:COrbiter(orbit, filename)
 {
 }
 
@@ -16,3 +19,9 @@ CPokemon::CPokemon()
 CPokemon::~CPokemon()
 {
 }
+
+void CPokemon::Update(double elapsed)
+{
+}
+
+

@@ -60,6 +60,9 @@
     <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Orbiter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Project1.cpp">
@@ -93,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Orbiter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

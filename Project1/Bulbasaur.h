@@ -15,7 +15,14 @@
 class CBulbasaur : public CPokemon
 {
 public:
-	CBulbasaur();
+	CBulbasaur(COrbit *orbit);
+
+	/// Default constructor (disabled)
+	CBulbasaur() = delete;
+
+	/// Default constructor (disabled)
+	CBulbasaur(const CBulbasaur&) = delete;
+
 	virtual ~CBulbasaur();
 
 private:

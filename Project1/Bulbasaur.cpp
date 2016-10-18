@@ -7,17 +7,23 @@
 
 
 #include "stdafx.h"
-#include <iostream>
+#include <string>
 #include "Bulbasaur.h"
+#include "Pokemon.h"
 
+using namespace Gdiplus;
 using namespace std;
 
+
+const wstring BulbasaurImage(L"images/bulbasaur.png");
 
 /**
 * Constructor.
 */
-CBulbasaur::CBulbasaur()
+CBulbasaur::CBulbasaur(COrbit * orbit) :
+	CPokemon(orbit, BulbasaurImage)
 {
+
 }
 
 /**
