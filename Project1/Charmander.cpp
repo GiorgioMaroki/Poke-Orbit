@@ -1,22 +1,29 @@
 /**
- * \file Charmander.cpp
- *
- * \author Giorgio Maroki
- */
+* \file Charmander.cpp
+*
+* \author Giorgio Maroki
+*
+*/
 
 
 #include "stdafx.h"
-#include <iostream>
+#include <string>
 #include "Charmander.h"
+#include "Pokemon.h"
 
+using namespace Gdiplus;
 using namespace std;
 
+
+const wstring CharmanderImage(L"images/charmander.png");
 
 /**
 * Constructor.
 */
-CCharmander::CCharmander()
+CCharmander::CCharmander(COrbit * orbit) :
+	CPokemon(orbit, CharmanderImage)
 {
+
 }
 
 /**

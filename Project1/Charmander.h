@@ -5,19 +5,27 @@
  *
  * 
  */
-
 #pragma once
+#include <string>
+#include "Pokemon.h"
 
-/**
- * Class about the charmander pokemoon
+ /**
+ * Class that describes a charmander.
  */
-class CCharmander
+class CCharmander : public CPokemon
 {
 public:
-	CCharmander();
+	CCharmander(COrbit *orbit);
+
+	/// Default constructor (disabled)
+	CCharmander() = delete;
+
+	/// Default constructor (disabled)
+	CCharmander(const CCharmander&) = delete;
+
 	virtual ~CCharmander();
 
 private:
-	/// Charmander velocity
-	long const mVelocity = 30;
+	/// Bulbasaur velocity
+	long const mVelocity = 10;
 };

@@ -2,21 +2,28 @@
 * \file Pikachu.cpp
 *
 * \author Giorgio Maroki
+*
 */
 
 
 #include "stdafx.h"
-#include <iostream>
+#include <string>
 #include "Pikachu.h"
+#include "Pokemon.h"
 
+using namespace Gdiplus;
 using namespace std;
 
+
+const wstring PikachuImage(L"images/pikachu.png");
 
 /**
 * Constructor.
 */
-CPikachu::CPikachu()
+CPikachu::CPikachu(COrbit * orbit) :
+	CPokemon(orbit, PikachuImage)
 {
+
 }
 
 /**
@@ -25,3 +32,4 @@ CPikachu::CPikachu()
 CPikachu::~CPikachu()
 {
 }
+
