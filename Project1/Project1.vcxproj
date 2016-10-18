@@ -186,6 +186,7 @@
     <ClInclude Include="ChildView.h" />
     <ClInclude Include="DoubleBufferDC.h" />
     <ClInclude Include="Emission.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Orbit.h" />
     <ClInclude Include="Pikachu.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Charmander.cpp" />
     <ClCompile Include="ChildView.cpp" />
     <ClCompile Include="Emission.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Orbit.cpp" />
     <ClCompile Include="Pikachu.cpp" />

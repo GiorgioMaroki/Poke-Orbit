@@ -11,7 +11,7 @@ using namespace Gdiplus;
 const std::wstring TrainerImageName(L"images/ash.png");
 
 /// Sample emission image
-const std::wstring RandomImageName(L"images/slowbro.png");
+const std::wstring RandomImageName(L"images/pikachu.png");
 
 COrbit::COrbit()
 {
