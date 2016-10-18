@@ -13,6 +13,8 @@
 CPokemon::CPokemon(COrbit *orbit, const std::wstring & filename)
 	:COrbiter(orbit, filename)
 {
+
+
 }
 
 

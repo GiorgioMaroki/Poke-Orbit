@@ -90,3 +90,11 @@ void COrbit::Update(double elapsed)
 		emission->Update(elapsed);
 	}
 }
+
+
+void COrbit::Add(std::shared_ptr<CItem> item) 
+{
+
+	mItems.push_back(item);
+
+}

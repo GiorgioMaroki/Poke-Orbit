@@ -42,6 +42,12 @@ public:
 	/// Updates emission animation
 	void Update(double elapsed);
 
+	void OnAddBulbasaur();
+
+	void OnAddCharmander();
+
+	void OnAddPikachu();
+
 	/**
 	* The X location of the item
 	*
@@ -71,4 +77,6 @@ private:
 
 	/// Angular Velocity
 	double mAngularVelocity;
+
+
 };

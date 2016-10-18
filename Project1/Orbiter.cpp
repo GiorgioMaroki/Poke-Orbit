@@ -19,12 +19,8 @@ COrbiter::COrbiter(COrbit * orbit, const std::wstring & filename) :
 
 	mOrbit = orbit;
 	mAngularDisplacement = 5;
-
-	// Randomly set angular velocity (1 - 4)
-	mAngularVelocity = 1; // rand() % 4 + 1;
-
-						  // Randomly set distance(10 - 90)
-	mRadius = 300; //rand() & 81 + 10;
+	mAngularVelocity = 1;
+	mRadius = 300; 
 }
 
 

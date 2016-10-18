@@ -6,8 +6,24 @@
 
 #include "stdafx.h"
 #include "Emission.h"
+#include "Pokemon.h"
+#include "Bulbasaur.h"
+#include "Pikachu.h"
+#include "Charmander.h"
+#include "Orbit.h"
+#include <algorithm>
+
 
 using namespace Gdiplus;
+using namespace std;
+
+
+const int InitialX = 200;
+
+const int InitialY = 200;
+
+const int FrameDuration = 30;
+
 
  /**
   * Image path constructor
@@ -103,4 +119,27 @@ bool CEmission::HitTest(double x, double y)
 void CEmission::Update(double elapsed)
 {
 	mAngularDisplacement += mAngularVelocity * elapsed;
+}
+
+
+void CEmission::OnAddBulbasaur()
+{
+	auto pokemon = make_shared<CBulbasaur>(mOrbit);
+	pokemon->SetLocation(InitialX, InitialY);
+	mOrbit->Add(pokemon);
+
+}
+
+void CEmission::OnAddCharmander()
+{
+	auto pokemon = make_shared<CPikachu>(mOrbit);
+	pokemon->SetLocation(InitialX, InitialY);
+	mOrbit->Add(pokemon);
+}
+
+void CEmission::OnAddPikachu()
+{
+	auto pokemon = make_shared<CCharmander>(mOrbit);
+	pokemon->SetLocation(InitialX, InitialY);
+	mOrbit->Add(pokemon);
 }

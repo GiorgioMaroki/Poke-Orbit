@@ -10,7 +10,7 @@
 #include "stdafx.h"
 #include <memory>
 #include <vector>
-
+#include "Item.h"
 #include "Emission.h"
 
 /**
@@ -28,6 +28,10 @@ public:
 	/// Updates orbit
 	void COrbit::Update(double elapsed);
 
+	void Add(std::shared_ptr<CItem> item);
+
+	//void Add(std::shared_ptr<CItem> item);
+
 private:
 	/// Playing area width in virtual pixels
 	const static int Width = 1400;
@@ -40,5 +44,7 @@ private:
 
 	/// All of the emissions in our orbit
 	std::vector<std::shared_ptr<CEmission> > mEmissions;
+
+	std::vector<std::shared_ptr<CItem> > mItems; ///< All of the items to populate our orbit
 };
 
