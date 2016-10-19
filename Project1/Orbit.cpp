@@ -4,8 +4,12 @@
 #include "Bulbasaur.h"
 #include "Charmander.h"
 #include "Emission.h"
+#include "Item.h"
+
 
 using namespace Gdiplus;
+using namespace std; 
+
 
 /// Trainer image filename
 const std::wstring TrainerImageName(L"images/ash.png");
@@ -85,16 +89,59 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
  */
 void COrbit::Update(double elapsed)
 {
-	for (auto emission : mEmissions)
+	for (auto emission : mItems)
 	{
 		emission->Update(elapsed);
 	}
 }
 
-
+// FOR POKEMON
 void COrbit::Add(std::shared_ptr<CItem> item) 
 {
-
 	mItems.push_back(item);
-
 }
+
+
+// FOR POKEBALL
+
+
+
+
+
+/** the item that is clicked is moved to the back of the vector
+*\param item
+*/
+void COrbit::MovetoFront(std::shared_ptr<CItem> item)
+{
+	auto loc = find(begin(mItems), end(mItems), item);
+	if (loc != end(mItems))
+	{
+		mItems.erase(loc);
+		mItems.push_back(item);
+	}
+}
+
+
+bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
+{
+	auto loc = find(begin(mItems), end(mItems), item);
+	if (loc != end(mItems))
+	{
+		mItems.erase(loc);
+		return 1;
+	}
+	return 0;
+}
+
+
+/**
+*  
+* Clears data for the system/game & deletes everything
+* 
+*/
+void COrbit::Clear()
+{
+
+	mItems.clear();
+}
+

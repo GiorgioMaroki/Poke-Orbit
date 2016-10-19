@@ -24,13 +24,6 @@ public:
 	void Update(double elapsed);
 
 
-	/** Saves the inputted tests for the XML file
-	* \param node
-	*\ return node */
-	//FOR TEST FILE FUNCTION
-
-
-
 	void ChangeSpeed(int SpeedX, int SpeedY);
 
 protected:

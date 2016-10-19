@@ -43,3 +43,5 @@ void COrbiter::Update(double elapsed)
 {
 	mAngularDisplacement += mAngularVelocity * elapsed;
 }
+
+

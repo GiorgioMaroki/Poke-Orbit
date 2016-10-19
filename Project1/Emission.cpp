@@ -122,12 +122,12 @@ void CEmission::Update(double elapsed)
 }
 
 
+
 void CEmission::OnAddBulbasaur()
 {
 	auto pokemon = make_shared<CBulbasaur>(mOrbit);
 	pokemon->SetLocation(InitialX, InitialY);
 	mOrbit->Add(pokemon);
-
 }
 
 void CEmission::OnAddCharmander()

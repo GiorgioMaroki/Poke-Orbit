@@ -30,6 +30,12 @@ public:
 
 	void Add(std::shared_ptr<CItem> item);
 
+	void MovetoFront(std::shared_ptr<CItem> item);
+
+	bool RemoveItem(std::shared_ptr<CItem> item);
+
+	void Clear();
+
 	//void Add(std::shared_ptr<CItem> item);
 
 private:
