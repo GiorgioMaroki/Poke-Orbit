@@ -89,7 +89,7 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
  */
 void COrbit::Update(double elapsed)
 {
-	for (auto emission : mItems)
+	for (auto emission : mEmissions)
 	{
 		emission->Update(elapsed);
 	}
@@ -111,6 +111,8 @@ void COrbit::Add(std::shared_ptr<CItem> item)
 /** the item that is clicked is moved to the back of the vector
 *\param item
 */
+
+
 void COrbit::MovetoFront(std::shared_ptr<CItem> item)
 {
 	auto loc = find(begin(mItems), end(mItems), item);
@@ -120,6 +122,7 @@ void COrbit::MovetoFront(std::shared_ptr<CItem> item)
 		mItems.push_back(item);
 	}
 }
+
 
 
 bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
@@ -139,6 +142,8 @@ bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 * Clears data for the system/game & deletes everything
 * 
 */
+
+
 void COrbit::Clear()
 {
 

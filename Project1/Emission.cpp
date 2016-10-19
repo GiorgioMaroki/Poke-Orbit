@@ -132,14 +132,14 @@ void CEmission::OnAddBulbasaur()
 
 void CEmission::OnAddCharmander()
 {
-	auto pokemon = make_shared<CPikachu>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
+	auto pokemon1 = make_shared<CPikachu>(mOrbit);
+	pokemon1->SetLocation(InitialX, InitialY);
+	mOrbit->Add(pokemon1);
 }
 
 void CEmission::OnAddPikachu()
 {
-	auto pokemon = make_shared<CCharmander>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
+	auto pokemon2 = make_shared<CCharmander>(mOrbit);
+	pokemon2->SetLocation(InitialX, InitialY);
+	mOrbit->Add(pokemon2);
 }
