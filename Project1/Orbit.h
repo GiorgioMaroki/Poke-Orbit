@@ -30,6 +30,8 @@ public:
 
 	void Add(std::shared_ptr<CItem> item);
 
+	void AddPokeBall(std::shared_ptr<CItem> item);
+
 	void MovetoFront(std::shared_ptr<CItem> item);
 
 	bool RemoveItem(std::shared_ptr<CItem> item);
@@ -52,5 +54,9 @@ private:
 	std::vector<std::shared_ptr<CEmission> > mEmissions;
 
 	std::vector<std::shared_ptr<CItem> > mItems; ///< All of the items to populate our orbit
+
+	std::vector<std::pair<std::shared_ptr<CItem>, int>> mScore;
+
+	std::vector<std::shared_ptr<CItem>> mPokeballs;
 };
 

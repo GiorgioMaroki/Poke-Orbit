@@ -1,3 +1,6 @@
+
+
+
 #include "stdafx.h"
 #include "Orbit.h"
 #include "Pikachu.h"
@@ -20,9 +23,28 @@ const std::wstring RandomImageName(L"images/pikachu.png");
 COrbit::COrbit()
 {
 	// Make sample emission
-	//std::shared_ptr<CEmission> emission(this, &RandomImageName);
+	// std::shared_ptr<CEmission> emission(this, &RandomImageName);
 	auto emission = std::make_shared<CEmission>(this, RandomImageName);
 	mEmissions.push_back(emission);
+
+	auto pokemon = make_shared<CItem>(this, L"images/bulbasaur.png");
+	auto pokemon1 = make_shared<CItem>(this, L"images/pikachu.png");
+	auto pokemon2 = make_shared<CItem>(this, L"images/charmander.png");
+	std::pair<std::shared_ptr<CItem>, int>  poke(pokemon, 0);
+	std::pair<std::shared_ptr<CItem>, int>  poke1(pokemon1, 0);
+	std::pair<std::shared_ptr<CItem>, int>  poke2(pokemon2, 0);
+	mScore.push_back(poke);
+	mScore.push_back(poke1);
+	mScore.push_back(poke2);
+
+
+	for (int i = 0; i < 3; i++)
+	{
+		auto pokeBall = make_shared<CItem>(this, L"images/pokeball.png");
+		pokeBall->SetLocation(80, 80);
+		this->AddPokeBall(pokeBall);
+	}
+
 
 }
 
@@ -58,12 +80,12 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 
 	graphics->TranslateTransform(xOffset, yOffset);
 	graphics->ScaleTransform(scale, scale);
-	
+
 	// Draw the Trainer
 	auto trainerImage = std::unique_ptr<Bitmap>(Bitmap::FromFile(TrainerImageName.c_str()));
 	double tWidth = trainerImage->GetWidth();
 	double tHeight = trainerImage->GetHeight();
-		graphics->DrawImage(trainerImage.get(),
+	graphics->DrawImage(trainerImage.get(),
 		float(0 - tWidth / 2), float(0 - tHeight / 2),
 		(float)tWidth, (float)tHeight);
 
@@ -73,12 +95,43 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 
 	auto AshEmission = std::make_shared<CEmission>(this, TrainerImageName);
 
-	
+
 
 	// Draw the Emissions
 	for (auto emission : mEmissions)
 	{
 		emission->Draw(graphics);
+	}
+
+	//Draw the scoreboard
+	int pokeY = 220;
+	int scoreY = -20;
+	SolidBrush white(Color(255, 255, 255));
+	FontFamily fontFamily(L"Arial");
+	Gdiplus::Font font(&fontFamily, 30);
+
+
+	// Draw the score
+	for (auto item : mScore)
+	{
+		(item.first)->SetLocation(530, -pokeY);
+		(item.first)->Draw(graphics);
+
+
+		wstring score;
+		score = std::to_wstring(item.second);
+
+		(*graphics).DrawString(score.c_str(), -1, &font, PointF(720, -pokeY), &white);
+		pokeY = pokeY + 115;
+	}
+
+	int pokeballY = 300;
+	for (auto item : mPokeballs)
+	{
+		item->SetLocation(-700, -pokeballY);
+		item->Draw(graphics);
+		pokeballY = pokeballY + 70;
+
 	}
 }
 
@@ -95,15 +148,18 @@ void COrbit::Update(double elapsed)
 	}
 }
 
-// FOR POKEMON
+// ADD FOR POKEMON
 void COrbit::Add(std::shared_ptr<CItem> item) 
 {
 	mItems.push_back(item);
 }
 
 
-// FOR POKEBALL
-
+// ADD FOR POKEBALL
+void COrbit::AddPokeBall(std::shared_ptr<CItem> item)
+{
+	mPokeballs.push_back(item);
+}
 
 
 
@@ -142,8 +198,6 @@ bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 * Clears data for the system/game & deletes everything
 * 
 */
-
-
 void COrbit::Clear()
 {
 

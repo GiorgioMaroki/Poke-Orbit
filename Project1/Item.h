@@ -70,7 +70,7 @@ public:
 	void SetMirror(bool m) { mMirror = m;  }
 
 
-protected:
+//protected:
 	/** Set the item in the orbit
 	* \param *orbit the obj in aquarium
 	* \param &filename the file in the aquarium obj selected in the 1st pointer */
