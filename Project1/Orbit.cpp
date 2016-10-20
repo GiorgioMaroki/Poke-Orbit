@@ -38,6 +38,7 @@ COrbit::COrbit()
 	mScore.push_back(poke2);
 
 
+	// Start game with3 pokeballs 
 	for (int i = 0; i < 3; i++)
 	{
 		auto pokeBall = make_shared<CItem>(this, L"images/pokeball.png");
@@ -105,7 +106,7 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 
 	//Draw the scoreboard
 	int pokeY = 220;
-	int scoreY = -20;
+	int scoreY = 235;
 	SolidBrush white(Color(255, 255, 255));
 	FontFamily fontFamily(L"Arial");
 	Gdiplus::Font font(&fontFamily, 30);
@@ -121,8 +122,9 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 		wstring score;
 		score = std::to_wstring(item.second);
 
-		(*graphics).DrawString(score.c_str(), -1, &font, PointF(720, -pokeY), &white);
+		(*graphics).DrawString(score.c_str(), -1, &font, PointF(720, -scoreY), &white);
 		pokeY = pokeY + 115;
+		scoreY = scoreY + 115;
 	}
 
 	int pokeballY = 300;
