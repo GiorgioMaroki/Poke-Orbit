@@ -6,8 +6,9 @@
 
 #include "stdafx.h"
 #include <algorithm>
+#include <memory>
 #include <random>
-
+#include <time.h> 
 #include "Emission.h"
 #include "Pokemon.h"
 #include "Bulbasaur.h"
@@ -15,6 +16,7 @@
 #include "Charmander.h"
 #include "Orbit.h"
 #include "Item.h"
+
 
 using namespace Gdiplus;
 using namespace std;
@@ -24,6 +26,10 @@ const int InitialX = 200; ///< Initial X
 const int InitialY = 200; ///< Initial Y
 
 const int FrameDuration = 30; ///< Frame duration
+
+const int xCenter = 550;
+const int yCenter = 450;
+const int xyCenter = 300;
 
  /**
   * Image name constructor
@@ -45,10 +51,6 @@ CEmission::CEmission(COrbit *orbit)
 
 	// Randomly set distance (25 - 474)
 	mRadius = rand() % 450 + 25;
-
-
-	AddPikachu();
-
 
 }
 
@@ -146,5 +148,79 @@ void CEmission::AddCharmander()
 	auto pokemon = make_shared<CCharmander>(mOrbit);
 	pokemon->SetLocation(InitialX, InitialY);
 	mOrbit->Add(pokemon);
+}
+
+
+
+void CEmission::SpawnPokemon()
+{
+	int randomNum = rand();
+	int NumberOfPokemon = 3;
+
+	if(randomNum % NumberOfPokemon == 0)
+	{
+		AddBulbasaur();
+	}
+
+	else if (randomNum % NumberOfPokemon == 1)
+	{
+		AddPikachu();
+	}
+
+	else if(randomNum % NumberOfPokemon == 2)
+	{
+		AddCharmander();
+	}
+
+}
+
+
+
+void CEmission::GenerateRandomSpot()
+{
+	int x, y;
+	bool c = false;
+	while (!c)
+	{
+		x = mDisX(mRandom);
+		y = mDisY(mRandom);
+
+		if ((x*x) + (y*y) <= (xyCenter * xyCenter))
+		{
+			mX = xCenter + x;
+			mY = yCenter + y;
+			mRadius = sqrt((x*x) + (y*y));
+			c = true;
+		}
+	}
+}
+
+std::shared_ptr<COrbit> CEmission::CheckEmission(double elapsed)
+{
+	if (int(elapsed) >= (mTime + mPreviousEmission))
+	{
+		GenerateRandomSpot();
+		if (mDisItem(mRandom) == 0)
+		{
+
+		}
+		else if (mDisItem(mRandom) == 1)
+		{
+
+		}
+		else if (mDisItem(mRandom) == 2)
+		{
+
+		}
+		else
+		{
+			return nullptr;
+		}
+	}
+
+	else
+	{
+		return nullptr;
+	}
 }
 

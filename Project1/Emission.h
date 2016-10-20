@@ -1,7 +1,7 @@
 /**
  * \file Emission.h
  *
- * \author Steven Kneiser
+ * \author Steven Kneiser & Giorgio Maroki
  *
  * Emission abstract base class
  */
@@ -10,9 +10,9 @@
 
 
 #include "stdafx.h"
-#include <memory>
 #include <random>
 #include <string>
+#include <memory>
 
 // Forward reference
 class COrbit;
@@ -47,6 +47,12 @@ public:
 
 	void AddCharmander();
 
+	void SpawnPokemon();
+
+	void GenerateRandomSpot();
+
+	std::shared_ptr<COrbit> CheckEmission(double elapsed);
+
 
 	/**
 	* The X location of the item
@@ -62,9 +68,13 @@ public:
 	*/
 	double GetY() const { return mRadius * -sin(mAngularDisplacement); }
 
+
+
 private:
 	/// The orbit this emission is contained in
 	COrbit *mOrbit;
+
+	std::mt19937_64 mRandom;
 
 	/// Path to image representation
 	std::unique_ptr<Gdiplus::Bitmap> mEmissionImage;
@@ -77,4 +87,19 @@ private:
 
 	/// Angular Velocity
 	double mAngularVelocity;
+
+
+	int mX;
+	int mY;
+	int mTime;
+	int mPreviousEmission = 0;
+
+
+	std::uniform_int_distribution<int> mDisTime{ 0, 8 };
+	std::uniform_int_distribution<int> mDisX{ -300, 300 };
+	std::uniform_int_distribution<int> mDisY{ -300, 300 };
+	std::uniform_int_distribution<int> mDisItem{ 0, 6 };
+	std::uniform_int_distribution<int> mDisAng{ 0, 361 };
+
+
 };

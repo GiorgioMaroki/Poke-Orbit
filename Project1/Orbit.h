@@ -1,7 +1,7 @@
 /**
 * \file Orbit.h
 *
-* \author Noah Hirvela
+* \author Noah Hirvela & Giorgio Maroki
 *
 * Orbit Class
 */
