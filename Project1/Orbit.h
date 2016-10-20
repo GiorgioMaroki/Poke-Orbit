@@ -41,6 +41,9 @@ public:
 	/// Clear all orbit items
 	void Clear();
 
+	/// Add a pokeball
+	void AddPokeBall(std::shared_ptr<CItem> item);
+
 private:
 	/// Playing area width in virtual pixels
 	const static int Width = 1400;
@@ -56,4 +59,10 @@ private:
 
 	/// All of the items to populate our orbit
 	std::vector<std::shared_ptr<CItem> > mItems;
+
+	/// Scoreboard values
+	std::vector<std::pair<std::shared_ptr<CItem>, int>> mScore;
+
+	/// PokeballZZZZZZZZZZZZZZZZZ
+	std::vector<std::shared_ptr<CItem>> mPokeballs;
 };

@@ -192,6 +192,7 @@
     <ClInclude Include="Orbiter.h" />
     <ClInclude Include="Pikachu.h" />
     <ClInclude Include="Pokemon.h" />
+    <ClInclude Include="Pokestop.h" />
     <ClInclude Include="Project1.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Orbiter.cpp" />
     <ClCompile Include="Pikachu.cpp" />
     <ClCompile Include="Pokemon.cpp" />
+    <ClCompile Include="Pokestop.cpp" />
     <ClCompile Include="Project1.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
