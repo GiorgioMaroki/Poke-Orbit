@@ -13,7 +13,7 @@
  * \param orbit Orbit containing this pokemon
  * \param filename Image filename
  */
-CPokemon::CPokemon(COrbit *orbit, const std::wstring &filename) : CEmission(orbit, filename)
+CPokemon::CPokemon(COrbit *orbit, const std::wstring &filename) : COrbiter(orbit, filename)
 {
 
 }

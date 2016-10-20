@@ -5,7 +5,7 @@
 #include "Orbit.h"
 
 CPokestop::CPokestop(COrbit *orbit, const std::wstring & filename)
-	:CItem(orbit, filename)
+	:COrbiter(orbit, filename)
 {
 
 

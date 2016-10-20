@@ -10,6 +10,7 @@
 #include "Pikachu.h"
 #include "Bulbasaur.h"
 #include "Charmander.h"
+#include "Pokemon.h"
 #include "Emission.h"
 #include "Item.h"
 
@@ -37,6 +38,7 @@ COrbit::COrbit()
 	mScore.push_back(poke1);
 	mScore.push_back(poke2);
 
+	mEmitter = new CEmission(this);
 
 	// Start game with3 pokeballs 
 	for (int i = 0; i < 3; i++)
@@ -46,17 +48,6 @@ COrbit::COrbit()
 		this->AddPokeBall(pokeBall);
 	}
 
-
-	// Make sample emissions
-	for (int i = 0; i < 5; i++)
-	{
-		auto pika = std::make_shared<CPikachu>(this);
-		auto bulb = std::make_shared<CBulbasaur>(this);
-		auto mand = std::make_shared<CCharmander>(this);
-		mEmissions.push_back(pika);
-		mEmissions.push_back(bulb);
-		mEmissions.push_back(mand);
-	}
 }
 
 
@@ -107,12 +98,12 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	Pen pen(Color::Green);
 	graphics->DrawArc(&pen, -radius, -radius, radius * 2, radius * 2, 0, 360);
 
-	auto AshEmission = std::make_shared<CEmission>(this, TrainerImageName);
+	//auto AshEmission = std::make_shared<CEmission>(this, TrainerImageName);
 
 	// Draw the Emissions
-	for (auto emission : mEmissions)
+	for (auto item : mItems)
 	{
-		emission->Draw(graphics);
+		item->Draw(graphics);
 	}
 
 	//Draw the scoreboard
@@ -155,14 +146,14 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
  */
 void COrbit::Update(double elapsed)
 {
-	for (auto emission : mEmissions)
+	for (auto emission : mEmission)
 	{
 		emission->Update(elapsed);
 	}
 }
 
 // ADD FOR POKEMON
-void COrbit::Add(std::shared_ptr<CItem> item) 
+void COrbit::Add(const std::shared_ptr<CItem> &item) 
 {
 	mItems.push_back(item);
 }

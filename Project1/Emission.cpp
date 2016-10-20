@@ -14,6 +14,7 @@
 #include "Pikachu.h"
 #include "Charmander.h"
 #include "Orbit.h"
+#include "Item.h"
 
 using namespace Gdiplus;
 using namespace std;
@@ -30,15 +31,9 @@ const int FrameDuration = 30; ///< Frame duration
   * \param orbit pointer to greater orbit
   * \param filename path to image
   */
-CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
+CEmission::CEmission(COrbit *orbit)
 {
-	mEmissionImage = std::unique_ptr<Bitmap>(Bitmap::FromFile(filename.c_str()));
-	if (mEmissionImage->GetLastStatus() != Ok) {
 
-		std::wstring msg(L"Failed to open.");
-		msg += filename;
-		AfxMessageBox(msg.c_str());
-	}
 
 	mOrbit = orbit;
 
@@ -50,22 +45,11 @@ CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 
 	// Randomly set distance (25 - 474)
 	mRadius = rand() % 450 + 25;
-}
 
 
-/**
- * Draw this item
- *
- * \param graphics Graphics device to draw on
- */
-void CEmission::Draw(Gdiplus::Graphics * graphics)
-{
-	double width = mEmissionImage->GetWidth();
-	double height = mEmissionImage->GetHeight();
+	AddPikachu();
 
-	graphics->DrawImage(mEmissionImage.get(),
-		float(GetX() - width / 2), float(GetY() - height / 2),
-		(float)width, (float)height);
+
 }
 
 
@@ -121,3 +105,46 @@ void CEmission::Update(double elapsed)
 {
 	mAngularDisplacement += mAngularVelocity * elapsed;
 }
+
+
+
+/*
+void CEmission::SpawnPokemon()
+{
+	// Make sample emissions
+	for (int i = 0; i < 5; i++)
+	{
+		auto pika = std::make_shared<CPikachu>(this);
+		auto bulb = std::make_shared<CBulbasaur>(this);
+		auto mand = std::make_shared<CCharmander>(this);
+		//mEmissions.push_back(pika);
+		//mEmissions.push_back(bulb);
+		//mEmissions.push_back(mand);
+	}
+
+
+}
+*/
+
+
+void CEmission::AddPikachu()
+{
+	auto pokemon = make_shared<CPikachu>(mOrbit);
+	pokemon->SetLocation(InitialX, InitialY);
+	mOrbit->Add(pokemon);
+}
+
+void CEmission::AddBulbasaur()
+{
+	auto pokemon = make_shared<CBulbasaur>(mOrbit);
+	pokemon->SetLocation(InitialX, InitialY);
+	mOrbit->Add(pokemon);
+}
+
+void CEmission::AddCharmander()
+{
+	auto pokemon = make_shared<CCharmander>(mOrbit);
+	pokemon->SetLocation(InitialX, InitialY);
+	mOrbit->Add(pokemon);
+}
+

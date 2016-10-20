@@ -1,11 +1,12 @@
 #pragma once
 
 #include "Item.h"
+#include "Orbiter.h"
 
 /**
  * Class that implements Pokestop
  */
-class CPokestop :public CItem
+class CPokestop :public COrbiter
 {
 public:
 	/// Default constructor (disabled)

@@ -30,19 +30,23 @@ public:
 	CEmission(const CEmission &) = delete;
 
 	/// Image name constructor
-	CEmission(COrbit *orbit, const std::wstring &filename);
+	CEmission(COrbit *orbit);
 
 	/// Virtual destructor
 	virtual ~CEmission() {};
-
-	/// Draw this item
-	void Draw(Gdiplus::Graphics *graphics);
 
 	/// Test this emission to see if it has been clicked on
 	bool HitTest(double x, double y);
 
 	/// Updates emission animation
 	void Update(double elapsed);
+
+	void AddPikachu();
+
+	void AddBulbasaur();
+
+	void AddCharmander();
+
 
 	/**
 	* The X location of the item
