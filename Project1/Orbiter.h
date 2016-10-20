@@ -10,8 +10,10 @@
 #pragma once
 #include "Item.h"
 
-class COrbiter :
-	public CItem
+/**
+ * Class that implements Orbiter
+ */
+class COrbiter : public CItem
 {
 public:
 	/// Default constructor (disabled)
@@ -19,16 +21,19 @@ public:
 
 	/// Copy constructor (disable)
 	COrbiter(const COrbiter &) = delete;
+
+	/// Virtual destructor
 	virtual ~COrbiter();
 
+	/// nothing
 	void Update(double elapsed);
 
-
+	/// nothing
 	void ChangeSpeed(int SpeedX, int SpeedY);
 
 protected:
+	/// Image name constructor
 	COrbiter(COrbit *orbit, const std::wstring &filename);
-
 
 private:
 	/// The orbit it is contained in
@@ -45,6 +50,5 @@ private:
 
 	/// Angular Velocity
 	double mAngularVelocity;
-
 };
 

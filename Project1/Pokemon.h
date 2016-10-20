@@ -1,37 +1,29 @@
 /**
  * \file Pokemon.h
  *
- * \author Giorgio Maroki
+ * \author Steven Kneiser
  *
- * 
+ * Pokemon abstract base class
  */
+
 #pragma once
-
-#include "Orbiter.h"
-
+#include "Emission.h"
 
 /**
- * Base class for the pokemon
+ * Abstract base class for Pokemon
  */
-class CPokemon : public COrbiter
+class CPokemon : public CEmission
 {
 public:
-	/// Default constructor (disabled)
+	/// Default constructor
 	CPokemon() = delete;
 	
 	/// Copy constructor (disable)
 	CPokemon(const CPokemon &) = delete;
 
-	virtual ~CPokemon();
+	/// Main constructor
+	CPokemon(COrbit *orbit, const std::wstring &filename);
 
-	void Update(double elapsed);
-
-
-protected:
-	CPokemon(COrbit * orbit, const std::wstring &filename);
-
-
-private:
-
+	/// Virtual destructor
+	virtual ~CPokemon() {};
 };
-

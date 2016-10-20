@@ -1,32 +1,31 @@
 /**
  * \file Pikachu.h
  *
- * \author Giorgio Maroki
+ * \author Steven Kneiser
  *
- * 
+ * Pikachu class
  */
 
 #pragma once
-#include <string>
 #include "Pokemon.h"
 
- /**
- * Class that describes a Pikachu.
+const std::wstring PikachuImage(L"images/pikachu.png"); ///< Pikachu Image
+
+/**
+ * Class that implements a Pikachu
  */
 class CPikachu : public CPokemon
 {
 public:
-	CPikachu(COrbit *orbit);
-
 	/// Default constructor (disabled)
 	CPikachu() = delete;
-
-	/// Default constructor (disabled)
+	
+	/// Copy constructor (disabled)
 	CPikachu(const CPikachu&) = delete;
 
-	virtual ~CPikachu();
+	/// Main constructor
+	CPikachu(COrbit *orbit) : CPokemon(orbit, PikachuImage) {};
 
-private:
-	/// Pikachu velocity
-	long const mVelocity = 10;
+	/// Virtual Destructor
+	virtual ~CPikachu() {};
 };

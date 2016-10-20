@@ -3,7 +3,7 @@
  *
  * \author Steven Kneiser
  *
- * Emission class.
+ * Emission abstract base class
  */
 
 #pragma once
@@ -16,7 +16,7 @@
 class COrbit;
 
 /**
- * Class that implements an Emission.
+ * Abstract base class that implements an Emission
  */
 class CEmission
 {
@@ -27,27 +27,20 @@ public:
 	/// Copy constructor (disabled)
 	CEmission(const CEmission &) = delete;
 
-	/// Image path constructor
+	/// Image name constructor
 	CEmission(COrbit *orbit, const std::wstring &filename);
 
 	/// Virtual destructor
 	virtual ~CEmission() {};
 
 	/// Draw this item
-	virtual void Draw(Gdiplus::Graphics *graphics);
+	void Draw(Gdiplus::Graphics *graphics);
 
 	/// Test this emission to see if it has been clicked on
-	virtual bool HitTest(double x, double y);
+	bool HitTest(double x, double y);
 
 	/// Updates emission animation
 	void Update(double elapsed);
-
-	void OnAddBulbasaur();
-
-	void OnAddCharmander();
-
-	void OnAddPikachu();
-
 
 	/**
 	* The X location of the item
@@ -78,6 +71,4 @@ private:
 
 	/// Angular Velocity
 	double mAngularVelocity;
-
-
 };

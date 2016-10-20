@@ -1,31 +1,31 @@
 /**
  * \file Charmander.h
  *
- * \author Giorgio Maroki
+ * \author Steven Kneiser
  *
- * 
+ * Charmander class
  */
+
 #pragma once
-#include <string>
 #include "Pokemon.h"
 
- /**
- * Class that describes a charmander.
+const std::wstring CharmanderImage(L"images/charmander.png"); ///< Charmander Image
+
+/**
+ * Class that describes a bulbasaur
  */
 class CCharmander : public CPokemon
 {
 public:
-	CCharmander(COrbit *orbit);
-
 	/// Default constructor (disabled)
 	CCharmander() = delete;
 
 	/// Default constructor (disabled)
 	CCharmander(const CCharmander&) = delete;
 
-	virtual ~CCharmander();
+	/// Main constructor
+	CCharmander(COrbit *orbit) : CPokemon(orbit, CharmanderImage) {};
 
-private:
-	/// Bulbasaur velocity
-	long const mVelocity = 10;
+	/// Virtual destructor
+	virtual ~CCharmander() {};
 };

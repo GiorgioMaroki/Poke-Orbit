@@ -1,31 +1,31 @@
 /**
  * \file Bulbasaur.h
  *
- * \author Giorgio Maroki
+ * \author Steven Kneiser
  *
- * 
+ * Bulbasaur class
  */
+
 #pragma once
-#include <string>
 #include "Pokemon.h"
 
- /**
-  * Class that describes a bulbasaur.
-  */
+const std::wstring BulbasaurImage(L"images/bulbasaur.png"); ///< Bulbasaur image
+
+/**
+ * Class that implements a bulbasaur
+ */
 class CBulbasaur : public CPokemon
 {
 public:
-	CBulbasaur(COrbit *orbit);
-
 	/// Default constructor (disabled)
 	CBulbasaur() = delete;
 
 	/// Default constructor (disabled)
 	CBulbasaur(const CBulbasaur&) = delete;
 
-	virtual ~CBulbasaur();
+	/// Main constructor
+	CBulbasaur(COrbit *orbit) : CPokemon(orbit, BulbasaurImage) {};
 
-private:
-	/// Bulbasaur velocity
-	long const mVelocity = 10;
+	/// Virtual destructor
+	virtual ~CBulbasaur() {};
 };

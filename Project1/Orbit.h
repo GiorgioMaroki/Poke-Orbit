@@ -3,13 +3,14 @@
 *
 * \author Noah Hirvela
 *
-* Orbit Class.
+* Orbit Class
 */
 
 #pragma once
 #include "stdafx.h"
 #include <memory>
 #include <vector>
+
 #include "Item.h"
 #include "Emission.h"
 
@@ -28,15 +29,17 @@ public:
 	/// Updates orbit
 	void COrbit::Update(double elapsed);
 
+	/// Adds item to orbit
 	void Add(std::shared_ptr<CItem> item);
 
+	/// Move item to front
 	void MovetoFront(std::shared_ptr<CItem> item);
 
+	/// Removes item from orbit
 	bool RemoveItem(std::shared_ptr<CItem> item);
 
+	/// Clear all orbit items
 	void Clear();
-
-	//void Add(std::shared_ptr<CItem> item);
 
 private:
 	/// Playing area width in virtual pixels
@@ -51,6 +54,6 @@ private:
 	/// All of the emissions in our orbit
 	std::vector<std::shared_ptr<CEmission> > mEmissions;
 
-	std::vector<std::shared_ptr<CItem> > mItems; ///< All of the items to populate our orbit
+	/// All of the items to populate our orbit
+	std::vector<std::shared_ptr<CItem> > mItems;
 };
-

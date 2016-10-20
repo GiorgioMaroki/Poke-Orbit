@@ -6,24 +6,14 @@
 
 #include "stdafx.h"
 #include "Pokemon.h"
-#include "Orbit.h"
-#include "Item.h"
 
-
-CPokemon::CPokemon(COrbit *orbit, const std::wstring & filename)
-	:COrbiter(orbit, filename)
+/**
+ * Main constructor
+ *
+ * \param orbit Orbit containing this pokemon
+ * \param filename Image filename
+ */
+CPokemon::CPokemon(COrbit *orbit, const std::wstring &filename) : CEmission(orbit, filename)
 {
 
-
 }
-
-
-CPokemon::~CPokemon()
-{
-}
-
-void CPokemon::Update(double elapsed)
-{
-}
-
-

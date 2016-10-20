@@ -1,4 +1,8 @@
 #include "stdafx.h"
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
 #include "Orbit.h"
 #include "Pikachu.h"
 #include "Bulbasaur.h"
@@ -6,10 +10,8 @@
 #include "Emission.h"
 #include "Item.h"
 
-
 using namespace Gdiplus;
 using namespace std; 
-
 
 /// Trainer image filename
 const std::wstring TrainerImageName(L"images/ash.png");
@@ -19,14 +21,25 @@ const std::wstring RandomImageName(L"images/pikachu.png");
 
 COrbit::COrbit()
 {
-	// Make sample emission
-	//std::shared_ptr<CEmission> emission(this, &RandomImageName);
-	auto emission = std::make_shared<CEmission>(this, RandomImageName);
-	mEmissions.push_back(emission);
+	/* initialize random seed: */
+	srand(time(NULL));
 
+	// Make sample emissions
+	for (int i = 0; i < 5; i++)
+	{
+		auto pika = std::make_shared<CPikachu>(this);
+		auto bulb = std::make_shared<CBulbasaur>(this);
+		auto mand = std::make_shared<CCharmander>(this);
+		mEmissions.push_back(pika);
+		mEmissions.push_back(bulb);
+		mEmissions.push_back(mand);
+	}
 }
 
 
+/**
+ * Destructor
+ */
 COrbit::~COrbit()
 {
 }
@@ -72,8 +85,6 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	graphics->DrawArc(&pen, -radius, -radius, radius * 2, radius * 2, 0, 360);
 
 	auto AshEmission = std::make_shared<CEmission>(this, TrainerImageName);
-
-	
 
 	// Draw the Emissions
 	for (auto emission : mEmissions)

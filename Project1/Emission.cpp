@@ -5,28 +5,27 @@
  */
 
 #include "stdafx.h"
+#include <algorithm>
+#include <random>
+
 #include "Emission.h"
 #include "Pokemon.h"
 #include "Bulbasaur.h"
 #include "Pikachu.h"
 #include "Charmander.h"
 #include "Orbit.h"
-#include <algorithm>
-
 
 using namespace Gdiplus;
 using namespace std;
 
+const int InitialX = 200; ///< Initial X
 
-const int InitialX = 200;
+const int InitialY = 200; ///< Initial Y
 
-const int InitialY = 200;
-
-const int FrameDuration = 30;
-
+const int FrameDuration = 30; ///< Frame duration
 
  /**
-  * Image path constructor
+  * Image name constructor
   *
   * \param orbit pointer to greater orbit
   * \param filename path to image
@@ -42,13 +41,15 @@ CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 	}
 
 	mOrbit = orbit;
-	mAngularDisplacement = 5;
+
+	// Randomly set angular displacement (0 - 6)
+	mAngularDisplacement = rand() % 100;
 
 	// Randomly set angular velocity (1 - 4)
-	mAngularVelocity = 1; // rand() % 4 + 1;
+	mAngularVelocity = rand() % 4 + 1;
 
-	// Randomly set distance(10 - 90)
-	mRadius = 300; //rand() & 81 + 10;
+	// Randomly set distance (25 - 474)
+	mRadius = rand() % 450 + 25;
 }
 
 
@@ -119,27 +120,4 @@ bool CEmission::HitTest(double x, double y)
 void CEmission::Update(double elapsed)
 {
 	mAngularDisplacement += mAngularVelocity * elapsed;
-}
-
-
-
-void CEmission::OnAddBulbasaur()
-{
-	auto pokemon = make_shared<CBulbasaur>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
-}
-
-void CEmission::OnAddCharmander()
-{
-	auto pokemon1 = make_shared<CPikachu>(mOrbit);
-	pokemon1->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon1);
-}
-
-void CEmission::OnAddPikachu()
-{
-	auto pokemon2 = make_shared<CCharmander>(mOrbit);
-	pokemon2->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon2);
 }

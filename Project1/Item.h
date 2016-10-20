@@ -85,6 +85,7 @@ private:
 	double mX = 0; ///< X location for the center of the item
 	double mY = 0; ///< Y location for the center of the item 
 
+	/// Vertical reflection for turning around
 	bool mMirror = false;
 
 	/// The image of the item in the orbit
