@@ -12,6 +12,8 @@
 #include <random>
 #include <string>
 #include <memory>
+#include "Item.h"
+#include "Orbit.h"
 
 // Forward reference
 class COrbit;

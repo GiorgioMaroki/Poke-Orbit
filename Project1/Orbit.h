@@ -14,10 +14,12 @@
 #include "Item.h"
 #include "Emission.h"
 
+class CEmission;
+
 /**
  * Class that defines the PokeOrbit
  */
-class COrbit
+class COrbit 
 {
 public:
 	COrbit();
