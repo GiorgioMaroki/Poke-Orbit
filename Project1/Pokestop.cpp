@@ -11,8 +11,6 @@ CPokestop::CPokestop(COrbit *orbit, const std::wstring & filename)
 
 }
 
-
-
 CPokestop::~CPokestop()
 {
 }

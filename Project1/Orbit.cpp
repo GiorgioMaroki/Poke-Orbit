@@ -1,6 +1,3 @@
-
-
-
 #include "stdafx.h"
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
@@ -13,6 +10,7 @@
 #include "Pokemon.h"
 #include "Emission.h"
 #include "Item.h"
+#include "Pokeball.h"
 
 using namespace Gdiplus;
 using namespace std; 
@@ -83,6 +81,10 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	float xOffset = width / 2.0f;
 	float yOffset = height / 2.0f;
 
+	mCenterX = xOffset;
+	mCenterY = yOffset;
+
+
 	graphics->TranslateTransform(xOffset, yOffset);
 	graphics->ScaleTransform(scale, scale);
 
@@ -120,7 +122,6 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 		(item.first)->SetLocation(530, -pokeY);
 		(item.first)->Draw(graphics);
 
-
 		wstring score;
 		score = std::to_wstring(item.second);
 
@@ -130,12 +131,17 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	}
 
 	int pokeballY = 300;
-	for (auto item : mPokeballs)
+	for (auto item : mBallCount)
 	{
 		item->SetLocation(-700, -pokeballY);
 		item->Draw(graphics);
 		pokeballY = pokeballY + 70;
+	}
 
+	/// Moving pokeballs
+	for (auto pokeball : mMovePokeballs)
+	{
+		pokeball->Draw(graphics);
 	}
 }
 
@@ -150,6 +156,23 @@ void COrbit::Update(double elapsed)
 	{
 		emission->Update(elapsed);
 	}
+
+	vector<shared_ptr<CPokeball> > toDelete;
+
+	for (auto pokeball : mMovePokeballs)
+	{
+		pokeball->Update(elapsed);
+		double radius = sqrt(pow(pokeball->GetX(), 2.0) + pow(pokeball->GetY(), 2.0));
+		if (radius > Radius)
+		{
+			toDelete.push_back(pokeball);
+		}
+	}
+
+	for (auto ball : toDelete)
+	{
+		//mMovePokeballs.erase(std::remove(mMovePokeballs.begin(), mMovePokeballs.end(), ball), mMovePokeballs.end());
+	}
 }
 
 // ADD FOR POKEMON
@@ -158,21 +181,21 @@ void COrbit::Add(const std::shared_ptr<CItem> &item)
 	mItems.push_back(item);
 }
 
-
 // ADD FOR POKEBALL
 void COrbit::AddPokeBall(std::shared_ptr<CItem> item)
 {
-	mPokeballs.push_back(item);
+	mBallCount.push_back(item);
 }
 
-
-
+void COrbit::Click(double x, double y)
+{
+	auto pokeball = make_shared<CPokeball>(this, x - mCenterX, mCenterY - y);
+	mMovePokeballs.push_back(pokeball);
+}
 
 /** the item that is clicked is moved to the back of the vector
 *\param item
 */
-
-
 void COrbit::MovetoFront(std::shared_ptr<CItem> item)
 {
 	auto loc = find(begin(mItems), end(mItems), item);
@@ -182,8 +205,6 @@ void COrbit::MovetoFront(std::shared_ptr<CItem> item)
 		mItems.push_back(item);
 	}
 }
-
-
 
 bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 {
@@ -196,7 +217,6 @@ bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 	return 0;
 }
 
-
 /**
 *  
 * Clears data for the system/game & deletes everything
@@ -204,7 +224,6 @@ bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 */
 void COrbit::Clear()
 {
-
 	mItems.clear();
 }
 

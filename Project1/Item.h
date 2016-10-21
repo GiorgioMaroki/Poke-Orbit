@@ -8,7 +8,7 @@
 
 #pragma once
 
-
+#include <vector>
 #include <string>
 #include <memory>
 //#include "XmlNode.h"
@@ -40,7 +40,6 @@ public:
 	* \returns Y location in pixels */
 	double GetY() const { return mY; }
 
-
 	/** Set the item location
 	* \param x X location
 	* \param y Y location */
@@ -52,10 +51,11 @@ public:
 	/// \param elapsed the time since the last update
 	virtual void Update(double elapsed) {}
 
+	virtual void Click(double x, double y) {}
+
 	/// Get the orbit this item is in
 	/// \returns Orbit pointer
 	COrbit *GetOrbit() { return mOrbit; }
-
 
 	/** The height of the item 
 	* \returns height in pixels */
@@ -69,13 +69,11 @@ public:
 	/// \param m New mirror flag
 	void SetMirror(bool m) { mMirror = m;  }
 
-
 //protected:
 	/** Set the item in the orbit
 	* \param *orbit the obj in aquarium
 	* \param &filename the file in the aquarium obj selected in the 1st pointer */
 	CItem(COrbit *orbit, const std::wstring &filename);
-
 
 private:
 	/// The orbit this item is contained in
@@ -91,5 +89,7 @@ private:
 	/// The image of the item in the orbit
 	std::unique_ptr<Gdiplus::Bitmap> mItemImage;
 
+	/// All of the items to populate our orbit
+	std::vector<std::shared_ptr<CItem> > mItems;
 };
 

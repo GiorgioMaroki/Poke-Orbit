@@ -23,7 +23,6 @@ COrbiter::COrbiter(COrbit * orbit, const std::wstring & filename) :
 	mRadius = 300; 
 }
 
-
 COrbiter::~COrbiter()
 {
 }
@@ -31,8 +30,6 @@ COrbiter::~COrbiter()
 void COrbiter::ChangeSpeed(int SpeedX, int SpeedY)
 {
 }
-
-
 
 /**
 * Update emission animation

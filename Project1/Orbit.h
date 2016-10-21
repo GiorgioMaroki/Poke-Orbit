@@ -11,6 +11,7 @@
 #include <memory>
 #include <vector>
 
+#include "Pokeball.h"
 #include "Item.h"
 #include "Emission.h"
 
@@ -43,7 +44,13 @@ public:
 	/// Add a pokeball
 	void AddPokeBall(std::shared_ptr<CItem> item);
 
+	virtual void Click(double x, double y);
+
 private:
+
+	double mCenterX;
+	double mCenterY;
+
 	/// Playing area width in virtual pixels
 	const static int Width = 1400;
 
@@ -63,8 +70,11 @@ private:
 	std::vector<std::pair<std::shared_ptr<CItem>, int>> mScore;
 
 	/// Pokeball
-	std::vector<std::shared_ptr<CItem>> mPokeballs;
+	std::vector<std::shared_ptr<CItem>> mBallCount;
 
 	/// Emitter
-	CEmission *mEmitter;
+	CEmission *mEmitter;	
+
+	/// Vector of moving pokeballs
+	std::vector<std::shared_ptr<CPokeball>> mMovePokeballs;
 };

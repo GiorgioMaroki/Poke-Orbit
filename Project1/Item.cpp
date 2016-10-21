@@ -9,12 +9,8 @@
 #include "Item.h"
 #include "Orbit.h"
 
-
-
 using namespace Gdiplus;
 using namespace std;
-
-
 
 /** Constructor
 * \param orbit the orbit this item is a member of
@@ -31,15 +27,12 @@ CItem::CItem(COrbit *orbit, const std::wstring &filename) :
 	}
 }
 
-
 /**
 * Desctuctor
 */
 CItem::~CItem() 
 {
 }
-
-
 
 /**
  * Draw our item
@@ -50,19 +43,9 @@ void CItem::Draw(Gdiplus::Graphics * graphics)
 	double wid = mItemImage->GetWidth();
 	double hit = mItemImage->GetHeight();
 
-	if (mMirror)
-	{
-		graphics->DrawImage(mItemImage.get(), float(GetX() + wid / 2), float(GetY() - hit / 2),
-			-(float)mItemImage->GetWidth(), (float)mItemImage->GetHeight());
-
-	}
-
-	else
-	{
-		graphics->DrawImage(mItemImage.get(), float(GetX() + wid / 2), float(GetY() - hit / 2),
-			(float)mItemImage->GetWidth(), (float)mItemImage->GetHeight());
-	}
-
+	graphics->DrawImage(mItemImage.get(), float(GetX() + wid / 2), float(GetY() - hit / 2),
+		(float)mItemImage->GetWidth(), (float)mItemImage->GetHeight());
 }
+
 
 

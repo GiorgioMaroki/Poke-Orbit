@@ -1,7 +1,6 @@
 // ChildView.h : interface of the CChildView class
 //
 #include "Orbit.h"
-
 #pragma once
 
 
@@ -43,5 +42,7 @@ private:
 	long long mLastTime;    ///< Last time we read the timer
 	double mTimeFreq;       ///< Rate the timer updates
 	bool mFirstDraw = true;	///< Whether this is the first draw
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };
 

@@ -33,8 +33,6 @@ const int FrameDuration = 30; ///< Frame duration
   */
 CEmission::CEmission(COrbit *orbit)
 {
-
-
 	mOrbit = orbit;
 
 	// Randomly set angular displacement (0 - 6)
@@ -46,10 +44,7 @@ CEmission::CEmission(COrbit *orbit)
 	// Randomly set distance (25 - 474)
 	mRadius = rand() % 450 + 25;
 
-
 	AddPikachu();
-
-
 }
 
 
@@ -107,7 +102,6 @@ void CEmission::Update(double elapsed)
 }
 
 
-
 /*
 void CEmission::SpawnPokemon()
 {
@@ -121,11 +115,8 @@ void CEmission::SpawnPokemon()
 		//mEmissions.push_back(bulb);
 		//mEmissions.push_back(mand);
 	}
-
-
 }
 */
-
 
 void CEmission::AddPikachu()
 {
