@@ -43,6 +43,7 @@ public:
 	* \param y Y location */
 	void SetLocation(double x, double y) { mX = x; mY = y; }
 
+	/// Draws item
 	virtual void Draw(Gdiplus::Graphics *graphics);
 
 	/// Handle updates for animation
@@ -82,9 +83,10 @@ public:
 	* \param &filename the file in the aquarium obj selected in the 1st pointer */
 	CItem(COrbit *orbit, const std::wstring &filename);
 
+	/// Tests whether touches item
 	bool CItem::HitTest(int x, int y);
 
-	// base class so pokestops won't get caught 
+	/// base class so pokestops won't get caught 
 	virtual bool IsPokemon() { return false; }
 
 private:

@@ -27,8 +27,11 @@ public:
 	/// Virtual destructor
 	virtual ~CPokemon() {};
 
-	//Overrides the base class so the pokemon get caught (Base class is false this is true)
-	virtual bool IsPokemon() { return true; }
+	/// Pokemon ...IS Pokemon
+	bool IsPokemon() { return true; }
+	
+	/// Update the orbit's score map
+	virtual void ChangeScore(std::map<std::wstring, int> &orbitScore) {};
 
 private:
 	/// The orbit this emission is contained in

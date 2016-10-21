@@ -20,7 +20,6 @@ CPokeball::CPokeball(COrbit *orbit, double x, double y)
 		AfxMessageBox(msg.c_str());
 	}
 
-	
 	mAngularDisplacement = atan2(y, x);
 
 	double radius = sqrt(pow(x, 2.0) + pow(y, 2.0));

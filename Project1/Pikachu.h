@@ -28,4 +28,7 @@ public:
 
 	/// Virtual Destructor
 	virtual ~CPikachu() {};
+
+	/// Update the orbit's score map
+	virtual void ChangeScore(std::map<std::wstring, int> &orbitScore) { orbitScore[L"pikachu"]++; };
 };

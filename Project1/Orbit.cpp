@@ -2,6 +2,7 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <iterator>
 
 #include "Orbit.h"
 #include "Pikachu.h"
@@ -27,32 +28,11 @@ COrbit::COrbit()
 	/* initialize random seed: */
 	srand((unsigned int)time(NULL));
 
-	auto pokemon = make_shared<CItem>(this, L"images/bulbasaur.png");
-	auto pokemon1 = make_shared<CItem>(this, L"images/pikachu.png");
-	auto pokemon2 = make_shared<CItem>(this, L"images/charmander.png");
-	std::pair<std::shared_ptr<CItem>, int>  poke(pokemon, 0);
-	std::pair<std::shared_ptr<CItem>, int>  poke1(pokemon1, 0);
-	std::pair<std::shared_ptr<CItem>, int>  poke2(pokemon2, 0);
-	mScore.push_back(poke);
-	mScore.push_back(poke1);
-	mScore.push_back(poke2);
-
-	// Start game with3 pokeballs 
-	for (int i = 0; i < 3; i++)
-	{
-		auto pokeBall = make_shared<CItem>(this, L"images/pokeball.png");
-		pokeBall->SetLocation(80, 80);
-		this->AddPokeBall(pokeBall);
-	}
-
-}
-
-
-/**
- * Destructor
- */
-COrbit::~COrbit()
-{
+	// Populate the score map
+	mScore[L"pokeballs"] = 3;
+	mScore[L"pikachu"] = 0;
+	mScore[L"bulbasaur"] = 0;
+	mScore[L"charmander"] = 0;
 }
 
 
@@ -83,7 +63,6 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	mCenterX = xOffset;
 	mCenterY = yOffset;
 
-
 	graphics->TranslateTransform(xOffset, yOffset);
 	graphics->ScaleTransform(scale, scale);
 
@@ -98,8 +77,6 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	// Draw the Orbit
 	Pen pen(Color::Green);
 	graphics->DrawArc(&pen, -radius, -radius, radius * 2, radius * 2, 0, 360);
-
-	//auto AshEmission = std::make_shared<CEmission>(this, TrainerImageName);
 
 	// Draw the Emissions
 	for (auto emission : mEmissions)
@@ -120,25 +97,35 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	FontFamily fontFamily(L"Arial");
 	Gdiplus::Font font(&fontFamily, 30);
 
-	// Draw the score
-	for (auto item : mScore)
-	{
-		(item.first)->SetLocation(530, -pokeY);
-		(item.first)->Draw(graphics);
+	// Draw the pokemon for score
+	auto bulbasaurItem = make_shared<CItem>(this, L"images/bulbasaur.png");
+	bulbasaurItem->SetLocation(530, -220);
+	bulbasaurItem->Draw(graphics);
 
-		wstring score;
-		score = std::to_wstring(item.second);
+	auto pikachuItem = make_shared<CItem>(this, L"images/pikachu.png");
+	pikachuItem->SetLocation(530, -335);
+	pikachuItem->Draw(graphics);
 
-		(*graphics).DrawString(score.c_str(), -1, &font, PointF((Gdiplus::REAL)720, (Gdiplus::REAL)-scoreY), &white);
-		pokeY = pokeY + 115;
-		scoreY = scoreY + 115;
-	}
+	auto charmanderItem = make_shared<CItem>(this, L"images/charmander.png");
+	charmanderItem->SetLocation(530, -450);
+	charmanderItem->Draw(graphics);
+	
+	/// Draw the Score
+	std::wstring bulbasaurScore = std::to_wstring(mScore[L"bulbasaur"]);
+	(*graphics).DrawString(bulbasaurScore.c_str(), -1, &font, PointF((Gdiplus::REAL)720, (Gdiplus::REAL) - 220), &white);
+
+	std::wstring pikachuScore = std::to_wstring(mScore[L"pikachu"]);
+	(*graphics).DrawString(pikachuScore.c_str(), -1, &font, PointF((Gdiplus::REAL)720, (Gdiplus::REAL) - 335), &white);
+
+	std::wstring charmanderScore = std::to_wstring(mScore[L"charmander"]);
+	(*graphics).DrawString(charmanderScore.c_str(), -1, &font, PointF((Gdiplus::REAL)720, (Gdiplus::REAL) - 450), &white);
 
 	int pokeballY = 300;
-	for (auto item : mBallCount)
+	for (int _ = 0; _ < mScore[L"pokeballs"]; _++)
 	{
-		item->SetLocation(-700, -pokeballY);
-		item->Draw(graphics);
+		auto pokeball = make_shared<CItem>(this, L"images/pokeball.png");
+		pokeball->SetLocation(-700, -pokeballY);
+		pokeball->Draw(graphics);
 		pokeballY = pokeballY + 70;
 	}
 
@@ -199,7 +186,18 @@ void COrbit::Update(double elapsed)
 		{
 			toDelete.push_back(pokeball);
 		}
+
+		// Check for collisions
+		for (auto emission : mEmissions)
+		{
+			if (emission->HitTest(pokeball->GetX(), pokeball->GetY()))
+			{
+				emission->ChangeScore(mScore);
+			}
+		}
 	}
+
+
 
 	// Delete pokeballs
 	for (auto ball : toDelete)
@@ -232,8 +230,25 @@ void COrbit::AddPokeBall(std::shared_ptr<CItem> item)
 
 void COrbit::Click(double x, double y)
 {
-	auto pokeball = make_shared<CPokeball>(this, x - mCenterX, mCenterY - y);
-	mMovePokeballs.push_back(pokeball);
+	bool pokestopClicked = false;
+	for (auto emission : mEmissions)
+	{
+		if (!emission->IsPokemon()) {
+
+			if (emission->HitTest(x, y)) {
+				//emission->Clicked(mScore);
+				pokestopClicked = true;
+				mScore[L"pokeballs"]++;
+				//TODO -> add Clicked method to emission & pokestop
+			}
+		}
+	}
+
+	if (!pokestopClicked)
+	{
+		auto pokeball = make_shared<CPokeball>(this, x - mCenterX, mCenterY- y);
+		mMovePokeballs.push_back(pokeball);
+	}
 }
 
 /** the item that is clicked is moved to the back of the vector

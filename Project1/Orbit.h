@@ -8,6 +8,7 @@
 
 #pragma once
 #include "stdafx.h"
+#include <map>
 #include <memory>
 #include <vector>
 
@@ -23,8 +24,11 @@ class CEmission;
 class COrbit 
 {
 public:
+	// Default constructor
 	COrbit();
-	virtual ~COrbit();
+	
+	/// Destructor
+	virtual ~COrbit() {};
 	
 	/// Draws orbit
 	void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height);
@@ -44,6 +48,7 @@ public:
 	/// Clear all orbit items
 	void Clear();
 
+	/// \todo something
 	bool Caught(std::shared_ptr<CEmission> item);
 
 	/// Add a pokeball
@@ -72,7 +77,7 @@ private:
 	std::vector<std::shared_ptr<CItem> > mItems;
 
 	/// Scoreboard values
-	std::vector<std::pair<std::shared_ptr<CItem>, int>> mScore;
+	std::map<std::wstring, int> mScore;
 
 	/// Pokeball
 	std::vector<std::shared_ptr<CItem>> mBallCount;
@@ -83,7 +88,6 @@ private:
 	/// Time before next spawn
 	double mNextSpawn = 0;
 	
-
 	/// Vector of moving pokeballs
 	std::vector<std::shared_ptr<CPokeball>> mMovePokeballs;
 };

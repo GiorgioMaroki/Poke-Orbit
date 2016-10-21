@@ -28,4 +28,7 @@ public:
 
 	/// Virtual destructor
 	virtual ~CBulbasaur() {};
+
+	/// Update the orbit's score map
+	virtual void ChangeScore(std::map<std::wstring, int> &orbitScore) { orbitScore[L"bulbasaur"]++; };
 };

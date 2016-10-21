@@ -36,7 +36,7 @@ public:
 	/// Virtual destructor
 	virtual ~CEmission() {};
 
-	/// Test this emission to see if it has been clicked on
+	/// Test this emission to see if it exists here
 	bool HitTest(double x, double y);
 
 	/// Updates emission animation
@@ -59,8 +59,11 @@ public:
 	*/
 	double GetY() const { return mRadius * -sin(mAngularDisplacement); }
 
-	// base class so pokestops won't get caught 
+	/// Determine whether derived class is pokemon
 	virtual bool IsPokemon() { return false; }
+
+	/// Update the orbit's score map
+	virtual void ChangeScore(std::map<std::wstring, int> &orbitScore) = 0;
 
 private:
 	/// The orbit this emission is contained in

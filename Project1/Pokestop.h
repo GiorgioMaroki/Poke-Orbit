@@ -38,6 +38,12 @@ public:
 	/// Update Pokestop
 	void Update(double elapsed) {};
 
+	/// Test this emission to see if it exists here
+	bool HitTest(double x, double y);
+
+	///  Update the orbit's score map
+	void ChangeScore(std::map<std::wstring, int> &orbitScore) {};
+
 private:
 	COrbit *mOrbit; ///< orbit
 };
