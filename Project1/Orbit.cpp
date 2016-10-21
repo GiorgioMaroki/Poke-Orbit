@@ -189,6 +189,7 @@ void COrbit::Update(double elapsed)
 
 	vector<shared_ptr<CPokeball> > toDelete;
 
+	// Find out which pokeballs need to be deleted
 	for (auto pokeball : mMovePokeballs)
 	{
 		pokeball->Update(elapsed);
@@ -199,10 +200,21 @@ void COrbit::Update(double elapsed)
 		}
 	}
 
+	// Delete pokeballs
 	for (auto ball : toDelete)
 	{
-		//mMovePokeballs.erase(std::remove(mMovePokeballs.begin(), mMovePokeballs.end(), ball), mMovePokeballs.end());
+		for (auto iter = mMovePokeballs.begin(); iter != mMovePokeballs.end();)
+		{
+			if ((*iter) == ball)
+			{
+				iter = mMovePokeballs.erase(iter);
+			}
+			else {
+				++iter;
+			}
+		}
 	}
+	
 }
 
 // ADD FOR POKEMON
