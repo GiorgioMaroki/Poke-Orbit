@@ -11,11 +11,9 @@
 #include <vector>
 #include <string>
 #include <memory>
-//#include "XmlNode.h"
 
+// Forward referrence
 class COrbit;
-
-
 
 /**
  *  Base class for any item in our aquarium
@@ -49,13 +47,16 @@ public:
 
 	/// Handle updates for animation
 	/// \param elapsed the time since the last update
-	virtual void Update(double elapsed) {}
+	virtual void Update(double elapsed) {};
 
-	virtual void Click(double x, double y) {}
+	/// Handle click event
+	/// \param x X-coordinate
+	/// \param y Y-coordinate
+	virtual void Click(double x, double y) {};
 
 	/// Get the orbit this item is in
 	/// \returns Orbit pointer
-	COrbit *GetOrbit() { return mOrbit; }
+	COrbit *GetOrbit() { return mOrbit; };
 
 	/** The height of the item 
 	* \returns height in pixels */
@@ -68,6 +69,12 @@ public:
 	/// Set the mirror status
 	/// \param m New mirror flag
 	void SetMirror(bool m) { mMirror = m;  }
+
+	/// Set the angle of the item
+	void SetAngle(double angle) { mAngle = angle; }
+
+	///Set the radius of the item
+	void SetRadius(double radius) { mRadius = radius; }
 
 //protected:
 	/** Set the item in the orbit
@@ -83,6 +90,9 @@ private:
 	double mX = 0; ///< X location for the center of the item
 	double mY = 0; ///< Y location for the center of the item 
 
+	double mAngle = 0; ///< item angle
+	double mRadius = 250; ///< item radius
+
 	/// Vertical reflection for turning around
 	bool mMirror = false;
 
@@ -92,4 +102,3 @@ private:
 	/// All of the items to populate our orbit
 	std::vector<std::shared_ptr<CItem> > mItems;
 };
-

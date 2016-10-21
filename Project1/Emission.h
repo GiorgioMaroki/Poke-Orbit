@@ -1,18 +1,19 @@
 /**
  * \file Emission.h
  *
- * \author Steven Kneiser
+ * \author Steven Kneiser & Giorgio Maroki
  *
  * Emission abstract base class
  */
 
 #pragma once
 
-
 #include "stdafx.h"
-#include <memory>
 #include <random>
 #include <string>
+#include <memory>
+#include "Item.h"
+#include "Orbit.h"
 
 // Forward reference
 class COrbit;
@@ -30,7 +31,7 @@ public:
 	CEmission(const CEmission &) = delete;
 
 	/// Image name constructor
-	CEmission(COrbit *orbit);
+	CEmission(COrbit *orbit, const std::wstring &filename);
 
 	/// Virtual destructor
 	virtual ~CEmission() {};
@@ -41,12 +42,8 @@ public:
 	/// Updates emission animation
 	void Update(double elapsed);
 
-	void AddPikachu();
-
-	void AddBulbasaur();
-
-	void AddCharmander();
-
+	/// Draws emission
+	void Draw(Gdiplus::Graphics * graphics);
 
 	/**
 	* The X location of the item

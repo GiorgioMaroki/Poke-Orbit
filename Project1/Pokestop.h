@@ -1,12 +1,26 @@
+/**
+ * \file Pokestop.h
+ *
+ * \author Steven Kneiser
+ *
+ * Pokestop class
+ */
+
 #pragma once
 
 #include "Item.h"
-#include "Orbiter.h"
+#include "Emission.h"
+
+ /// Pokestop image
+const std::wstring PokestopImage(L"images/pokestop.png");
+
+// Forward referrence
+class COrbit;
 
 /**
  * Class that implements Pokestop
  */
-class CPokestop :public COrbiter
+class CPokestop : public CEmission
 {
 public:
 	/// Default constructor (disabled)
@@ -16,12 +30,15 @@ public:
 	CPokestop(const CPokestop &) = delete;
 
 	/// Image name cosntructor
-	CPokestop(COrbit * orbit, const std::wstring & filename);
+	CPokestop(COrbit *orbit) : CEmission(orbit, PokestopImage) {};
 
 	/// Virtual destructor
-	virtual ~CPokestop();
+	virtual ~CPokestop() {};
 
 	/// Update Pokestop
-	void Update(double elapsed);
+	void Update(double elapsed) {};
+
+private:
+	COrbit *mOrbit; ///< orbit
 };
 

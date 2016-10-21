@@ -43,6 +43,5 @@ private:
 	double mTimeFreq;       ///< Rate the timer updates
 	bool mFirstDraw = true;	///< Whether this is the first draw
 public:
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point); ///< Event handler for left-click
 };
-

@@ -12,13 +12,24 @@
 // Forward referrence
 class COrbit;
 
+/**
+ * Class that implements Pokeball
+ */
 class CPokeball
 {
 public:
+	/// Default constructor (disabled)
 	CPokeball() = delete;
+
+	/// Virtual destructor
 	virtual ~CPokeball();
+
+	/// Copy constructor (disabled)
 	CPokeball::CPokeball(COrbit *orbit, double x, double y);
+	
+	/// Updates coordinates
 	void Update(double elapsed);
+	
 	/**
 	* The X location of the item
 	*
@@ -33,12 +44,22 @@ public:
 	*/
 	double GetY() const { return mRadius * -sin(mAngularDisplacement); }
 
+	/// Draw pokeball graphic
 	void Draw(Gdiplus::Graphics *graphics);
 
 private:
+	/// Pokeball image
 	std::unique_ptr<Gdiplus::Bitmap> mPokeballImage;
+
+	/// Orbit radius
 	double mRadius = 0;
+
+	/// Angular displacement in orbit
 	double mAngularDisplacement;
+
+	/// Ball velocity
 	double mVelocity;
+
+	/// Orbit containing ball
 	COrbit *mOrbit;
 };

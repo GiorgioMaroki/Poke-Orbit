@@ -1,7 +1,7 @@
 /**
 * \file Orbit.h
 *
-* \author Noah Hirvela
+* \author Noah Hirvela & Giorgio Maroki
 *
 * Orbit Class
 */
@@ -15,10 +15,12 @@
 #include "Item.h"
 #include "Emission.h"
 
+class CEmission;
+
 /**
  * Class that defines the PokeOrbit
  */
-class COrbit
+class COrbit 
 {
 public:
 	COrbit();
@@ -30,6 +32,7 @@ public:
 	/// Updates orbit
 	void COrbit::Update(double elapsed);
 
+	/// Adds item to orbit
 	void Add(const std::shared_ptr<CItem>& item);
 
 	/// Move item to front
@@ -44,12 +47,12 @@ public:
 	/// Add a pokeball
 	void AddPokeBall(std::shared_ptr<CItem> item);
 
+	/// Simulates click event
 	virtual void Click(double x, double y);
 
 private:
-
-	double mCenterX;
-	double mCenterY;
+	double mCenterX; ///< Central X-coordinate
+	double mCenterY; ///< Central Y-coordinate
 
 	/// Playing area width in virtual pixels
 	const static int Width = 1400;
@@ -61,7 +64,7 @@ private:
 	const static int Radius = 500;
 
 	/// All of the emissions in our orbit
-	std::vector<std::shared_ptr<CEmission> > mEmission;
+	std::vector<std::shared_ptr<CEmission> > mEmissions;
 
 	/// All of the items to populate our orbit
 	std::vector<std::shared_ptr<CItem> > mItems;
@@ -72,8 +75,12 @@ private:
 	/// Pokeball
 	std::vector<std::shared_ptr<CItem>> mBallCount;
 
-	/// Emitter
-	CEmission *mEmitter;	
+	/// Total time elapsed
+	double mTimeElapsed = 0;
+
+	/// Time before next spawn
+	double mNextSpawn = 0;
+	
 
 	/// Vector of moving pokeballs
 	std::vector<std::shared_ptr<CPokeball>> mMovePokeballs;

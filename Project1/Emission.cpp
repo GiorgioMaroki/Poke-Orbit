@@ -6,7 +6,9 @@
 
 #include "stdafx.h"
 #include <algorithm>
+#include <memory>
 #include <random>
+#include <time.h>
 
 #include "Emission.h"
 #include "Pokemon.h"
@@ -15,6 +17,7 @@
 #include "Charmander.h"
 #include "Orbit.h"
 #include "Item.h"
+
 
 using namespace Gdiplus;
 using namespace std;
@@ -31,9 +34,16 @@ const int FrameDuration = 30; ///< Frame duration
   * \param orbit pointer to greater orbit
   * \param filename path to image
   */
-CEmission::CEmission(COrbit *orbit)
+CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 {
 	mOrbit = orbit;
+	mEmissionImage = std::unique_ptr<Bitmap>(Bitmap::FromFile(filename.c_str()));
+
+	if (mEmissionImage->GetLastStatus() != Ok) {
+		std::wstring msg(L"Failed to open.");
+		msg += filename;
+		AfxMessageBox(msg.c_str());
+	}
 
 	// Randomly set angular displacement (0 - 6)
 	mAngularDisplacement = rand() % 100;
@@ -42,9 +52,7 @@ CEmission::CEmission(COrbit *orbit)
 	mAngularVelocity = rand() % 4 + 1;
 
 	// Randomly set distance (25 - 474)
-	mRadius = rand() % 450 + 25;
-
-	AddPikachu();
+	mRadius = rand() % 300 + 125;
 }
 
 
@@ -102,40 +110,17 @@ void CEmission::Update(double elapsed)
 }
 
 
-/*
-void CEmission::SpawnPokemon()
+/**
+ * Draw this emission
+ *
+ * \param graphics Graphics device to draw on
+ */
+void CEmission::Draw(Gdiplus::Graphics * graphics)
 {
-	// Make sample emissions
-	for (int i = 0; i < 5; i++)
-	{
-		auto pika = std::make_shared<CPikachu>(this);
-		auto bulb = std::make_shared<CBulbasaur>(this);
-		auto mand = std::make_shared<CCharmander>(this);
-		//mEmissions.push_back(pika);
-		//mEmissions.push_back(bulb);
-		//mEmissions.push_back(mand);
-	}
-}
-*/
+	double width = mEmissionImage->GetWidth();
+	double height = mEmissionImage->GetHeight();
 
-void CEmission::AddPikachu()
-{
-	auto pokemon = make_shared<CPikachu>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
+	graphics->DrawImage(mEmissionImage.get(),
+		float(GetX() - width / 2), float(GetY() - height / 2),
+		(float)width, (float)height);
 }
-
-void CEmission::AddBulbasaur()
-{
-	auto pokemon = make_shared<CBulbasaur>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
-}
-
-void CEmission::AddCharmander()
-{
-	auto pokemon = make_shared<CCharmander>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
-}
-

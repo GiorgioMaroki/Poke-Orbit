@@ -8,12 +8,11 @@
 
 #pragma once
 #include "Emission.h"
-#include "Orbiter.h"
 
 /**
  * Abstract base class for Pokemon
  */
-class CPokemon : public COrbiter
+class CPokemon : public CEmission
 {
 public:
 	/// Default constructor
@@ -28,18 +27,7 @@ public:
 	/// Virtual destructor
 	virtual ~CPokemon() {};
 
-	/** Set the item location
-	* \param x X location
-	* \param y Y location */
-	void SetLocation(double x, double y) { mX = x; mY = y; }
-
-
 private:
 	/// The orbit this emission is contained in
 	COrbit *mOrbit;
-
-
-	// Item location in the orbit
-	double mX = 0; ///< X location for the center of the item
-	double mY = 0; ///< Y location for the center of the item 
 };

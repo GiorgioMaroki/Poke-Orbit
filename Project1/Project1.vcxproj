@@ -189,7 +189,6 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Orbit.h" />
-    <ClInclude Include="Orbiter.h" />
     <ClInclude Include="Pikachu.h" />
     <ClInclude Include="Pokeball.h" />
     <ClInclude Include="Pokemon.h" />
@@ -207,7 +206,6 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Orbit.cpp" />
-    <ClCompile Include="Orbiter.cpp" />
     <ClCompile Include="Pikachu.cpp" />
     <ClCompile Include="Pokeball.cpp" />
     <ClCompile Include="Pokemon.cpp" />

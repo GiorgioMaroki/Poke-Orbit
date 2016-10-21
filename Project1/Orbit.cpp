@@ -11,6 +11,7 @@
 #include "Emission.h"
 #include "Item.h"
 #include "Pokeball.h"
+#include "Pokestop.h"
 
 using namespace Gdiplus;
 using namespace std; 
@@ -24,7 +25,7 @@ const std::wstring RandomImageName(L"images/pikachu.png");
 COrbit::COrbit()
 {
 	/* initialize random seed: */
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	auto pokemon = make_shared<CItem>(this, L"images/bulbasaur.png");
 	auto pokemon1 = make_shared<CItem>(this, L"images/pikachu.png");
@@ -35,8 +36,6 @@ COrbit::COrbit()
 	mScore.push_back(poke);
 	mScore.push_back(poke1);
 	mScore.push_back(poke2);
-
-	mEmitter = new CEmission(this);
 
 	// Start game with3 pokeballs 
 	for (int i = 0; i < 3; i++)
@@ -103,6 +102,12 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	//auto AshEmission = std::make_shared<CEmission>(this, TrainerImageName);
 
 	// Draw the Emissions
+	for (auto emission : mEmissions)
+	{
+		emission->Draw(graphics);
+	}
+
+	// Draw the items
 	for (auto item : mItems)
 	{
 		item->Draw(graphics);
@@ -115,7 +120,6 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	FontFamily fontFamily(L"Arial");
 	Gdiplus::Font font(&fontFamily, 30);
 
-
 	// Draw the score
 	for (auto item : mScore)
 	{
@@ -125,7 +129,7 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 		wstring score;
 		score = std::to_wstring(item.second);
 
-		(*graphics).DrawString(score.c_str(), -1, &font, PointF(720, -scoreY), &white);
+		(*graphics).DrawString(score.c_str(), -1, &font, PointF((Gdiplus::REAL)720, (Gdiplus::REAL)-scoreY), &white);
 		pokeY = pokeY + 115;
 		scoreY = scoreY + 115;
 	}
@@ -152,9 +156,35 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
  */
 void COrbit::Update(double elapsed)
 {
-	for (auto emission : mEmission)
+	for (auto emission : mEmissions)
 	{
 		emission->Update(elapsed);
+	}
+
+	// add elapsed to total time elapsed
+	mTimeElapsed += abs(elapsed);
+
+	// Spawn items
+	if (mTimeElapsed > mNextSpawn)
+	{
+		mTimeElapsed = 0;
+		mNextSpawn = rand() % 6 + 3;
+
+		switch (rand() % 4)
+		{
+		case 0:
+			mEmissions.push_back(make_shared<CPikachu>(this));
+			break;
+		case 1:
+			mEmissions.push_back(make_shared<CBulbasaur>(this));
+			break;
+		case 2:
+			mEmissions.push_back(make_shared<CCharmander>(this));
+			break;
+		case 3:
+			mEmissions.push_back(make_shared<CPokestop>(this));
+			break;
+		}
 	}
 
 	vector<shared_ptr<CPokeball> > toDelete;
