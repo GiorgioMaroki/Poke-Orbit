@@ -69,6 +69,11 @@ public:
 	/// \param m New mirror flag
 	void SetMirror(bool m) { mMirror = m;  }
 
+	/// Set the angle of the item
+	void SetAngle(double angle) { mAngle = angle; }
+
+	///Set the radius of the item
+	void SetRadius(double radius) { mRadius = radius; }
 
 //protected:
 	/** Set the item in the orbit
@@ -84,6 +89,8 @@ private:
 	// Item location in the orbit
 	double mX = 0; ///< X location for the center of the item
 	double mY = 0; ///< Y location for the center of the item 
+	double mAngle = 0;
+	double mRadius = 250;
 
 	/// Vertical reflection for turning around
 	bool mMirror = false;

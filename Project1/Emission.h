@@ -13,6 +13,8 @@
 #include <random>
 #include <string>
 #include <memory>
+#include "Item.h"
+#include "Orbit.h"
 
 // Forward reference
 class COrbit;
@@ -51,7 +53,7 @@ public:
 
 	void GenerateRandomSpot();
 
-	std::shared_ptr<COrbit> CheckEmission(double elapsed);
+	std::shared_ptr<CItem> CheckEmission(double elapsed);
 
 
 	/**
@@ -88,10 +90,18 @@ private:
 	/// Angular Velocity
 	double mAngularVelocity;
 
-
+	/// random x spawn
 	int mX;
+	
+	/// random y spawn
 	int mY;
+
+	/// random time spawn
 	int mTime;
+
+
+	
+	/// previous emission default to 0
 	int mPreviousEmission = 0;
 
 

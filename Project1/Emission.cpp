@@ -52,6 +52,7 @@ CEmission::CEmission(COrbit *orbit)
 	// Randomly set distance (25 - 474)
 	mRadius = rand() % 450 + 25;
 
+
 }
 
 
@@ -195,21 +196,40 @@ void CEmission::GenerateRandomSpot()
 	}
 }
 
-std::shared_ptr<COrbit> CEmission::CheckEmission(double elapsed)
+std::shared_ptr<CItem> CEmission::CheckEmission(double elapsed)
 {
 	if (int(elapsed) >= (mTime + mPreviousEmission))
 	{
 		GenerateRandomSpot();
 		if (mDisItem(mRandom) == 0)
 		{
-
+			auto item = make_shared<CBulbasaur>(mOrbit);
+			item->SetAngle(mDisAng(mRandom));
+			item->SetRadius(mRadius);
+			mTime = mDisTime(mRandom);
+			mPreviousEmission = int(elapsed);
+			return item;
 		}
+
 		else if (mDisItem(mRandom) == 1)
 		{
+			auto item1 = make_shared<CPikachu>(mOrbit);
+			item1->SetAngle(mDisAng(mRandom));
+			item1->SetRadius(mRadius);
+			mTime = mDisTime(mRandom);
+			mPreviousEmission = int(elapsed);
+			return item1;
 
 		}
+
 		else if (mDisItem(mRandom) == 2)
 		{
+			auto item2 = make_shared<CCharmander>(mOrbit);
+			item2->SetAngle(mDisAng(mRandom));
+			item2->SetRadius(mRadius);
+			mTime = mDisTime(mRandom);
+			mPreviousEmission = int(elapsed);
+			return item2;
 
 		}
 		else
