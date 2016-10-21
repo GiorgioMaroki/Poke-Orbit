@@ -29,6 +29,7 @@ public:
 	/// Updates orbit
 	void COrbit::Update(double elapsed);
 
+	/// Adds item to orbit
 	void Add(const std::shared_ptr<CItem>& item);
 
 	/// Move item to front
@@ -54,7 +55,7 @@ private:
 	const static int Radius = 500;
 
 	/// All of the emissions in our orbit
-	std::vector<std::shared_ptr<CEmission> > mEmission;
+	std::vector<std::shared_ptr<CEmission> > mEmissions;
 
 	/// All of the items to populate our orbit
 	std::vector<std::shared_ptr<CItem> > mItems;
@@ -65,6 +66,6 @@ private:
 	/// Pokeball
 	std::vector<std::shared_ptr<CItem>> mPokeballs;
 
-	/// Emitter
-	CEmission *mEmitter;
+	/// Total time elapsed
+	double mTimeElapsed = 0;
 };

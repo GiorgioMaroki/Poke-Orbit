@@ -10,6 +10,7 @@
 #include "Pokemon.h"
 #include "Emission.h"
 #include "Item.h"
+#include "Pokestop.h"
 
 using namespace Gdiplus;
 using namespace std; 
@@ -23,7 +24,7 @@ const std::wstring RandomImageName(L"images/pikachu.png");
 COrbit::COrbit()
 {
 	/* initialize random seed: */
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	auto pokemon = make_shared<CItem>(this, L"images/bulbasaur.png");
 	auto pokemon1 = make_shared<CItem>(this, L"images/pikachu.png");
@@ -35,8 +36,6 @@ COrbit::COrbit()
 	mScore.push_back(poke1);
 	mScore.push_back(poke2);
 
-	mEmitter = new CEmission(this);
-
 	// Start game with3 pokeballs 
 	for (int i = 0; i < 3; i++)
 	{
@@ -45,6 +44,18 @@ COrbit::COrbit()
 		this->AddPokeBall(pokeBall);
 	}
 
+	// Make sample emissions
+	/*
+	for (int i = 0; i < 5; i++)
+	{
+		auto pika = std::make_shared<CPikachu>(this);
+		auto bulb = std::make_shared<CBulbasaur>(this);
+		auto mand = std::make_shared<CCharmander>(this);
+		mEmissions.push_back(pika);
+		mEmissions.push_back(bulb);
+		mEmissions.push_back(mand);
+	}
+	*/
 }
 
 
@@ -98,6 +109,12 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	//auto AshEmission = std::make_shared<CEmission>(this, TrainerImageName);
 
 	// Draw the Emissions
+	for (auto emission : mEmissions)
+	{
+		emission->Draw(graphics);
+	}
+
+	// Draw the items
 	for (auto item : mItems)
 	{
 		item->Draw(graphics);
@@ -110,7 +127,6 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	FontFamily fontFamily(L"Arial");
 	Gdiplus::Font font(&fontFamily, 30);
 
-
 	// Draw the score
 	for (auto item : mScore)
 	{
@@ -121,7 +137,7 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 		wstring score;
 		score = std::to_wstring(item.second);
 
-		(*graphics).DrawString(score.c_str(), -1, &font, PointF(720, -scoreY), &white);
+		(*graphics).DrawString(score.c_str(), -1, &font, PointF((Gdiplus::REAL)720, (Gdiplus::REAL)-scoreY), &white);
 		pokeY = pokeY + 115;
 		scoreY = scoreY + 115;
 	}
@@ -143,10 +159,24 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
  */
 void COrbit::Update(double elapsed)
 {
-	for (auto emission : mEmission)
+	for (auto emission : mEmissions)
 	{
 		emission->Update(elapsed);
 	}
+
+	// add elapsed to total time elapsed
+	mTimeElapsed += abs(elapsed);
+
+	// Spawn items
+	/*
+	if (mTimeElapsed > 5)
+	{
+		auto pika = std::make_shared<CPikachu>(this);
+		auto stop = std::make_shared<CPokestop>(this);
+		mEmissions.push_back(pika);
+		mEmissions.push_back(stop);
+	}
+	*/
 }
 
 // ADD FOR POKEMON

@@ -8,7 +8,6 @@
 
 #pragma once
 
-
 #include "stdafx.h"
 #include <random>
 #include <string>
@@ -30,7 +29,7 @@ public:
 	CEmission(const CEmission &) = delete;
 
 	/// Image name constructor
-	CEmission(COrbit *orbit);
+	CEmission(COrbit *orbit, const std::wstring &filename);
 
 	/// Virtual destructor
 	virtual ~CEmission() {};
@@ -41,18 +40,8 @@ public:
 	/// Updates emission animation
 	void Update(double elapsed);
 
-	void AddPikachu();
-
-	void AddBulbasaur();
-
-	void AddCharmander();
-
-	void SpawnPokemon();
-
-	void GenerateRandomSpot();
-
-	std::shared_ptr<COrbit> CheckEmission(double elapsed);
-
+	/// Draws emission
+	void Draw(Gdiplus::Graphics * graphics);
 
 	/**
 	* The X location of the item
@@ -68,13 +57,9 @@ public:
 	*/
 	double GetY() const { return mRadius * -sin(mAngularDisplacement); }
 
-
-
 private:
 	/// The orbit this emission is contained in
 	COrbit *mOrbit;
-
-	std::mt19937_64 mRandom;
 
 	/// Path to image representation
 	std::unique_ptr<Gdiplus::Bitmap> mEmissionImage;
@@ -87,19 +72,4 @@ private:
 
 	/// Angular Velocity
 	double mAngularVelocity;
-
-
-	int mX;
-	int mY;
-	int mTime;
-	int mPreviousEmission = 0;
-
-
-	std::uniform_int_distribution<int> mDisTime{ 0, 8 };
-	std::uniform_int_distribution<int> mDisX{ -300, 300 };
-	std::uniform_int_distribution<int> mDisY{ -300, 300 };
-	std::uniform_int_distribution<int> mDisItem{ 0, 6 };
-	std::uniform_int_distribution<int> mDisAng{ 0, 361 };
-
-
 };

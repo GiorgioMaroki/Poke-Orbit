@@ -8,7 +8,8 @@
 #include <algorithm>
 #include <memory>
 #include <random>
-#include <time.h> 
+#include <time.h>
+
 #include "Emission.h"
 #include "Pokemon.h"
 #include "Bulbasaur.h"
@@ -27,21 +28,22 @@ const int InitialY = 200; ///< Initial Y
 
 const int FrameDuration = 30; ///< Frame duration
 
-const int xCenter = 550;
-const int yCenter = 450;
-const int xyCenter = 300;
-
  /**
   * Image name constructor
   *
   * \param orbit pointer to greater orbit
   * \param filename path to image
   */
-CEmission::CEmission(COrbit *orbit)
+CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 {
-
-
 	mOrbit = orbit;
+	mEmissionImage = std::unique_ptr<Bitmap>(Bitmap::FromFile(filename.c_str()));
+
+	if (mEmissionImage->GetLastStatus() != Ok) {
+		std::wstring msg(L"Failed to open.");
+		msg += filename;
+		AfxMessageBox(msg.c_str());
+	}
 
 	// Randomly set angular displacement (0 - 6)
 	mAngularDisplacement = rand() % 100;
@@ -50,8 +52,7 @@ CEmission::CEmission(COrbit *orbit)
 	mAngularVelocity = rand() % 4 + 1;
 
 	// Randomly set distance (25 - 474)
-	mRadius = rand() % 450 + 25;
-
+	mRadius = rand() % 400 + 50;
 }
 
 
@@ -109,118 +110,17 @@ void CEmission::Update(double elapsed)
 }
 
 
-
-/*
-void CEmission::SpawnPokemon()
+/**
+ * Draw this emission
+ *
+ * \param graphics Graphics device to draw on
+ */
+void CEmission::Draw(Gdiplus::Graphics * graphics)
 {
-	// Make sample emissions
-	for (int i = 0; i < 5; i++)
-	{
-		auto pika = std::make_shared<CPikachu>(this);
-		auto bulb = std::make_shared<CBulbasaur>(this);
-		auto mand = std::make_shared<CCharmander>(this);
-		//mEmissions.push_back(pika);
-		//mEmissions.push_back(bulb);
-		//mEmissions.push_back(mand);
-	}
+	double width = mEmissionImage->GetWidth();
+	double height = mEmissionImage->GetHeight();
 
-
+	graphics->DrawImage(mEmissionImage.get(),
+		float(GetX() - width / 2), float(GetY() - height / 2),
+		(float)width, (float)height);
 }
-*/
-
-
-void CEmission::AddPikachu()
-{
-	auto pokemon = make_shared<CPikachu>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
-}
-
-void CEmission::AddBulbasaur()
-{
-	auto pokemon = make_shared<CBulbasaur>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
-}
-
-void CEmission::AddCharmander()
-{
-	auto pokemon = make_shared<CCharmander>(mOrbit);
-	pokemon->SetLocation(InitialX, InitialY);
-	mOrbit->Add(pokemon);
-}
-
-
-
-void CEmission::SpawnPokemon()
-{
-	int randomNum = rand();
-	int NumberOfPokemon = 3;
-
-	if(randomNum % NumberOfPokemon == 0)
-	{
-		AddBulbasaur();
-	}
-
-	else if (randomNum % NumberOfPokemon == 1)
-	{
-		AddPikachu();
-	}
-
-	else if(randomNum % NumberOfPokemon == 2)
-	{
-		AddCharmander();
-	}
-
-}
-
-
-
-void CEmission::GenerateRandomSpot()
-{
-	int x, y;
-	bool c = false;
-	while (!c)
-	{
-		x = mDisX(mRandom);
-		y = mDisY(mRandom);
-
-		if ((x*x) + (y*y) <= (xyCenter * xyCenter))
-		{
-			mX = xCenter + x;
-			mY = yCenter + y;
-			mRadius = sqrt((x*x) + (y*y));
-			c = true;
-		}
-	}
-}
-
-std::shared_ptr<COrbit> CEmission::CheckEmission(double elapsed)
-{
-	if (int(elapsed) >= (mTime + mPreviousEmission))
-	{
-		GenerateRandomSpot();
-		if (mDisItem(mRandom) == 0)
-		{
-
-		}
-		else if (mDisItem(mRandom) == 1)
-		{
-
-		}
-		else if (mDisItem(mRandom) == 2)
-		{
-
-		}
-		else
-		{
-			return nullptr;
-		}
-	}
-
-	else
-	{
-		return nullptr;
-	}
-}
-
