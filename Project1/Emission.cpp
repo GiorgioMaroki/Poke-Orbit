@@ -52,7 +52,7 @@ CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 	mAngularVelocity = rand() % 4 + 1;
 
 	// Randomly set distance (25 - 474)
-	mRadius = rand() % 400 + 50;
+	mRadius = rand() % 300 + 125;
 }
 
 

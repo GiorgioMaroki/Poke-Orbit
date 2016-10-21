@@ -168,15 +168,27 @@ void COrbit::Update(double elapsed)
 	mTimeElapsed += abs(elapsed);
 
 	// Spawn items
-	/*
-	if (mTimeElapsed > 5)
+	if (mTimeElapsed > mNextSpawn)
 	{
-		auto pika = std::make_shared<CPikachu>(this);
-		auto stop = std::make_shared<CPokestop>(this);
-		mEmissions.push_back(pika);
-		mEmissions.push_back(stop);
+		mTimeElapsed = 0;
+		mNextSpawn = rand() % 6 + 3;
+
+		switch (rand() % 4)
+		{
+		case 0:
+			mEmissions.push_back(make_shared<CPikachu>(this));
+			break;
+		case 1:
+			mEmissions.push_back(make_shared<CBulbasaur>(this));
+			break;
+		case 2:
+			mEmissions.push_back(make_shared<CCharmander>(this));
+			break;
+		case 3:
+			mEmissions.push_back(make_shared<CPokestop>(this));
+			break;
+		}
 	}
-	*/
 }
 
 // ADD FOR POKEMON

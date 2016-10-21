@@ -7,15 +7,11 @@
  */
 
 #pragma once
-
-
 #include <string>
 #include <memory>
-//#include "XmlNode.h"
 
+// Forward referrence
 class COrbit;
-
-
 
 /**
  *  Base class for any item in our aquarium
@@ -89,14 +85,13 @@ private:
 	// Item location in the orbit
 	double mX = 0; ///< X location for the center of the item
 	double mY = 0; ///< Y location for the center of the item 
-	double mAngle = 0;
-	double mRadius = 250;
+
+	double mAngle = 0; ///< item angle
+	double mRadius = 250; ///< item radius
 
 	/// Vertical reflection for turning around
 	bool mMirror = false;
 
 	/// The image of the item in the orbit
 	std::unique_ptr<Gdiplus::Bitmap> mItemImage;
-
 };
-

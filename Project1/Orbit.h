@@ -70,4 +70,7 @@ private:
 
 	/// Total time elapsed
 	double mTimeElapsed = 0;
+
+	/// Time before next spawn
+	double mNextSpawn = 0;
 };
