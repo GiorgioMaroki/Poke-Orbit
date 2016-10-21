@@ -146,6 +146,7 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	for (auto pokeball : mMovePokeballs)
 	{
 		pokeball->Draw(graphics);
+
 	}
 }
 
@@ -267,5 +268,36 @@ bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 void COrbit::Clear()
 {
 	mItems.clear();
+}
+
+/**
+* See if this fish is eaten. We test it against the other fish
+* and if it is over a Carp, it is eaten and ceases to exist.
+* \param item Item we are testing
+* \returns bool
+*/
+bool COrbit::Caught(std::shared_ptr<CEmission> item)
+{
+	for (auto other : mEmissions)
+	{
+		// Do not compare to ourselves
+		if (other == item) {
+			continue;
+		}
+
+		if (other->IsPokemon() &&
+			other->HitTest((int)item->GetX(), (int)item->GetY()))
+		{
+			auto loc = find(begin(mEmissions), end(mEmissions), item);
+			if (loc != end(mEmissions))
+			{
+				mEmissions.erase(loc);
+			}
+
+			return true;
+		}
+
+	}
+	return false;
 }
 

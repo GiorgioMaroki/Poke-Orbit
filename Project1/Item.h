@@ -82,6 +82,11 @@ public:
 	* \param &filename the file in the aquarium obj selected in the 1st pointer */
 	CItem(COrbit *orbit, const std::wstring &filename);
 
+	bool CItem::HitTest(int x, int y);
+
+	// base class so pokestops won't get caught 
+	virtual bool IsPokemon() { return false; }
+
 private:
 	/// The orbit this item is contained in
 	COrbit *mOrbit;

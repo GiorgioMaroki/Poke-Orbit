@@ -59,6 +59,9 @@ public:
 	*/
 	double GetY() const { return mRadius * -sin(mAngularDisplacement); }
 
+	// base class so pokestops won't get caught 
+	virtual bool IsPokemon() { return false; }
+
 private:
 	/// The orbit this emission is contained in
 	COrbit *mOrbit;

@@ -44,6 +44,8 @@ public:
 	/// Clear all orbit items
 	void Clear();
 
+	bool Caught(std::shared_ptr<CEmission> item);
+
 	/// Add a pokeball
 	void AddPokeBall(std::shared_ptr<CItem> item);
 

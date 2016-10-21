@@ -27,6 +27,9 @@ public:
 	/// Virtual destructor
 	virtual ~CPokemon() {};
 
+	//Overrides the base class so the pokemon get caught (Base class is false this is true)
+	virtual bool IsPokemon() { return true; }
+
 private:
 	/// The orbit this emission is contained in
 	COrbit *mOrbit;
