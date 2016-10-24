@@ -33,6 +33,22 @@ COrbit::COrbit()
 	mScore[L"pikachu"] = 0;
 	mScore[L"bulbasaur"] = 0;
 	mScore[L"charmander"] = 0;
+
+	// Start with one pokestop & one pokemon
+	mEmissions.push_back(make_shared<CPokestop>(this));
+
+	switch (rand() % 3)
+	{
+	case 0:
+		mEmissions.push_back(make_shared<CPikachu>(this));
+		break;
+	case 1:
+		mEmissions.push_back(make_shared<CBulbasaur>(this));
+		break;
+	case 2:
+		mEmissions.push_back(make_shared<CCharmander>(this));
+		break;
+	}
 }
 
 
@@ -60,6 +76,7 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	float xOffset = width / 2.0f;
 	float yOffset = height / 2.0f;
 
+	mScale = scale;
 	mCenterX = xOffset;
 	mCenterY = yOffset;
 
@@ -120,11 +137,11 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	std::wstring charmanderScore = std::to_wstring(mScore[L"charmander"]);
 	(*graphics).DrawString(charmanderScore.c_str(), -1, &font, PointF((Gdiplus::REAL)720, (Gdiplus::REAL) - 450), &white);
 
-	int pokeballY = 300;
+	int pokeballY = -450;
 	for (int _ = 0; _ < mScore[L"pokeballs"]; _++)
 	{
 		auto pokeball = make_shared<CItem>(this, L"images/pokeball.png");
-		pokeball->SetLocation(-700, -pokeballY);
+		pokeball->SetLocation(-700, pokeballY);
 		pokeball->Draw(graphics);
 		pokeballY = pokeballY + 70;
 	}
@@ -137,6 +154,7 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	}
 }
 
+
 /**
  * Updates orbit
  *
@@ -147,6 +165,10 @@ void COrbit::Update(double elapsed)
 	for (auto emission : mEmissions)
 	{
 		emission->Update(elapsed);
+		if (!emission->IsPokemon())
+		{
+			emission->UpdateTime(elapsed);
+		}
 	}
 
 	// add elapsed to total time elapsed
@@ -156,7 +178,7 @@ void COrbit::Update(double elapsed)
 	if (mTimeElapsed > mNextSpawn)
 	{
 		mTimeElapsed = 0;
-		mNextSpawn = rand() % 6 + 3;
+		mNextSpawn = rand() % 8 + 3;
 
 		switch (rand() % 4)
 		{
@@ -197,8 +219,6 @@ void COrbit::Update(double elapsed)
 		}
 	}
 
-
-
 	// Delete pokeballs
 	for (auto ball : toDelete)
 	{
@@ -216,18 +236,35 @@ void COrbit::Update(double elapsed)
 	
 }
 
-// ADD FOR POKEMON
+
+/**
+ * Add item to orbit
+ *
+ * \param item Item to add
+ */
 void COrbit::Add(const std::shared_ptr<CItem> &item) 
 {
 	mItems.push_back(item);
 }
 
-// ADD FOR POKEBALL
-void COrbit::AddPokeBall(std::shared_ptr<CItem> item)
+
+/**
+ * Add pokeball to orbit
+ *
+ * \param pokeball Pokeball to add 
+ */
+void COrbit::AddPokeBall(std::shared_ptr<CItem> pokeball)
 {
-	mBallCount.push_back(item);
+	mBallCount.push_back(pokeball);
 }
 
+
+/**
+ * Simulate click event in orbit
+ *
+ * \param x X-coordinate clicked
+ * \param y Y-coordinate clicked
+ */
 void COrbit::Click(double x, double y)
 {
 	bool pokestopClicked = false;
@@ -235,25 +272,27 @@ void COrbit::Click(double x, double y)
 	{
 		if (!emission->IsPokemon()) {
 
-			if (emission->HitTest(x, y)) {
-				//emission->Clicked(mScore);
+			if (emission->HitTest((x - mCenterX) / mScale, (y - mCenterY) / mScale)) {
+				emission->Click(mScore);
 				pokestopClicked = true;
-				mScore[L"pokeballs"]++;
-				//TODO -> add Clicked method to emission & pokestop
 			}
 		}
 	}
 
-	if (!pokestopClicked)
+	if (!pokestopClicked && mScore[L"pokeballs"])
 	{
 		auto pokeball = make_shared<CPokeball>(this, x - mCenterX, mCenterY- y);
 		mMovePokeballs.push_back(pokeball);
+		mScore[L"pokeballs"]--;
 	}
 }
 
-/** the item that is clicked is moved to the back of the vector
-*\param item
-*/
+
+/**
+ * Move item in orbit to front
+ *
+ *\param item Item to move to front
+ */
 void COrbit::MovetoFront(std::shared_ptr<CItem> item)
 {
 	auto loc = find(begin(mItems), end(mItems), item);
@@ -264,6 +303,12 @@ void COrbit::MovetoFront(std::shared_ptr<CItem> item)
 	}
 }
 
+
+/**
+ * Removes item from orbit
+ *
+ * \param item Item to remove from orbit
+ */
 bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 {
 	auto loc = find(begin(mItems), end(mItems), item);
@@ -274,6 +319,7 @@ bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 	}
 	return 0;
 }
+
 
 /**
 *  

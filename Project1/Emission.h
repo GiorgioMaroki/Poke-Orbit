@@ -7,11 +7,11 @@
  */
 
 #pragma once
-
 #include "stdafx.h"
 #include <random>
 #include <string>
 #include <memory>
+
 #include "Item.h"
 #include "Orbit.h"
 
@@ -42,6 +42,9 @@ public:
 	/// Updates emission animation
 	void Update(double elapsed);
 
+	/// Updates emission animation (overridable)
+	virtual void UpdateTime(double elapsed) {};
+
 	/// Draws emission
 	void Draw(Gdiplus::Graphics * graphics);
 
@@ -64,6 +67,12 @@ public:
 
 	/// Update the orbit's score map
 	virtual void ChangeScore(std::map<std::wstring, int> &orbitScore) = 0;
+
+	/// Handle click event
+	virtual void Click(std::map<std::wstring, int> &orbitScore) {};
+
+	/// Change Emission Image
+	void SetImage(const std::wstring &filename);
 
 private:
 	/// The orbit this emission is contained in

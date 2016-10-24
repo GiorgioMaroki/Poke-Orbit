@@ -49,7 +49,7 @@ CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 	mAngularDisplacement = rand() % 100;
 
 	// Randomly set angular velocity (1 - 4)
-	mAngularVelocity = rand() % 4 + 1;
+	mAngularVelocity = (rand() % 4 + 1) / 3;
 
 	// Randomly set distance (25 - 474)
 	mRadius = rand() % 300 + 125;
@@ -123,4 +123,20 @@ void CEmission::Draw(Gdiplus::Graphics * graphics)
 	graphics->DrawImage(mEmissionImage.get(),
 		float(GetX() - width / 2), float(GetY() - height / 2),
 		(float)width, (float)height);
+}
+
+/**
+ * Change Emission image
+ *
+ * \param filename Filepath to new image
+ */
+void CEmission::SetImage(const std::wstring &filename)
+{
+	mEmissionImage = std::unique_ptr<Bitmap>(Bitmap::FromFile(filename.c_str()));
+
+	if (mEmissionImage->GetLastStatus() != Ok) {
+		std::wstring msg(L"Failed to open.");
+		msg += filename;
+		AfxMessageBox(msg.c_str());
+	}
 }

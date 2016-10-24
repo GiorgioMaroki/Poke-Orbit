@@ -48,18 +48,19 @@ public:
 	/// Clear all orbit items
 	void Clear();
 
-	/// \todo something
-	bool Caught(std::shared_ptr<CEmission> item);
+	/// Handles pokeball-catch event
+	bool Caught(std::shared_ptr<CEmission> emission);
 
 	/// Add a pokeball
 	void AddPokeBall(std::shared_ptr<CItem> item);
 
-	/// Simulates click event
+	/// Handles click event
 	virtual void Click(double x, double y);
 
 private:
 	double mCenterX; ///< Central X-coordinate
 	double mCenterY; ///< Central Y-coordinate
+	double mScale;  ///< X & Y scale
 
 	/// Playing area width in virtual pixels
 	const static int Width = 1400;
@@ -86,7 +87,7 @@ private:
 	double mTimeElapsed = 0;
 
 	/// Time before next spawn
-	double mNextSpawn = 0;
+	double mNextSpawn = rand() % 8 + 3;
 	
 	/// Vector of moving pokeballs
 	std::vector<std::shared_ptr<CPokeball>> mMovePokeballs;
