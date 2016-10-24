@@ -20,7 +20,7 @@ void CPokestop::UpdateTime(double elapsed)
 	if (mElapsed > 60)
 	{
 		true;
-		/// FIX DIS SHIT
+		//mOrbit->RemoveItem(this);
 	}
 
 	// Used-pokestop timeout
@@ -34,7 +34,7 @@ void CPokestop::UpdateTime(double elapsed)
 /**
  * Handle click event
  *
- * \param score Score map to update
+ * \param orbitScore Score map to update
  */
 void CPokestop::Click(std::map<std::wstring, int> &orbitScore)
 {

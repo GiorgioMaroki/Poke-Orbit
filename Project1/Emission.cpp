@@ -49,7 +49,7 @@ CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
 	mAngularDisplacement = rand() % 100;
 
 	// Randomly set angular velocity (1 - 4)
-	mAngularVelocity = (rand() % 4 + 1) / 3;
+	mAngularVelocity = rand() % 4 + 1;
 
 	// Randomly set distance (25 - 474)
 	mRadius = rand() % 300 + 125;
@@ -61,7 +61,7 @@ CEmission::CEmission(COrbit *orbit, const std::wstring &filename)
  *
  * \param x X location on the orbit to test
  * \param y Y location on the orbit to test
- * \return true if clicked on
+ * \returns true if clicked on
  */
 bool CEmission::HitTest(double x, double y)
 {

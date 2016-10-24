@@ -21,12 +21,15 @@ public:
 	/// Default constructor (disabled)
 	CPokeball() = delete;
 
-	/// Virtual destructor
-	virtual ~CPokeball();
-
 	/// Copy constructor (disabled)
+	CPokeball(const CPokeball &) = delete;
+
+	/// Main constructor
 	CPokeball::CPokeball(COrbit *orbit, double x, double y);
 	
+	/// Virtual destructor
+	virtual ~CPokeball() {};
+
 	/// Updates coordinates
 	void Update(double elapsed);
 	

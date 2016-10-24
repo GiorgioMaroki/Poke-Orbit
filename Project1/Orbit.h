@@ -45,6 +45,9 @@ public:
 	/// Removes item from orbit
 	bool RemoveItem(std::shared_ptr<CItem> item);
 
+	/// Removes pokeball from orbit
+	bool RemovePokeball(std::shared_ptr<CPokeball> ball);
+
 	/// Clear all orbit items
 	void Clear();
 

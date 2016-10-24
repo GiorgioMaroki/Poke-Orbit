@@ -197,6 +197,8 @@ void COrbit::Update(double elapsed)
 		}
 	}
 
+	// Check for collisions
+	vector<std::shared_ptr<CEmission>> toDeleteEmission;
 	vector<shared_ptr<CPokeball> > toDelete;
 
 	// Find out which pokeballs need to be deleted
@@ -209,20 +211,27 @@ void COrbit::Update(double elapsed)
 			toDelete.push_back(pokeball);
 		}
 
-		// Check for collisions
 		for (auto emission : mEmissions)
 		{
-			if (emission->HitTest(pokeball->GetX(), pokeball->GetY()))
+			if (emission->IsPokemon() && emission->HitTest(pokeball->GetX(), pokeball->GetY()))
 			{
 				emission->ChangeScore(mScore);
+				toDeleteEmission.push_back(emission);
+				toDelete.push_back(pokeball);
 			}
 		}
 	}
 
-	// Delete pokeballs
+	// Delete pokeballs & collisions
+	for (auto emission : toDeleteEmission)
+	{
+		this->Caught(emission);
+	}
+
 	for (auto ball : toDelete)
 	{
-		for (auto iter = mMovePokeballs.begin(); iter != mMovePokeballs.end();)
+		this->RemovePokeball(ball);
+		/*	for (auto iter = mMovePokeballs.begin(); iter != mMovePokeballs.end();)
 		{
 			if ((*iter) == ball)
 			{
@@ -231,7 +240,7 @@ void COrbit::Update(double elapsed)
 			else {
 				++iter;
 			}
-		}
+		}*/
 	}
 	
 }
@@ -308,6 +317,7 @@ void COrbit::MovetoFront(std::shared_ptr<CItem> item)
  * Removes item from orbit
  *
  * \param item Item to remove from orbit
+ * \returns true Whether item is removed
  */
 bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 {
@@ -315,9 +325,27 @@ bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
 	if (loc != end(mItems))
 	{
 		mItems.erase(loc);
-		return 1;
+		return true;
 	}
-	return 0;
+	return false;
+}
+
+
+/**
+ * Removes pokeball from orbit
+ *
+ * \param ball Pokeball to remove
+ * \returns true Whether ball is removed
+ */
+bool COrbit::RemovePokeball(std::shared_ptr<CPokeball> ball)
+{
+	auto loc = find(begin(mMovePokeballs), end(mMovePokeballs), ball);
+	if (loc != end(mMovePokeballs))
+	{
+		mMovePokeballs.erase(loc);
+		return true;
+	}
+	return false;
 }
 
 
@@ -346,8 +374,7 @@ bool COrbit::Caught(std::shared_ptr<CEmission> item)
 			continue;
 		}
 
-		if (other->IsPokemon() &&
-			other->HitTest((int)item->GetX(), (int)item->GetY()))
+		if (other->IsPokemon())
 		{
 			auto loc = find(begin(mEmissions), end(mEmissions), item);
 			if (loc != end(mEmissions))
