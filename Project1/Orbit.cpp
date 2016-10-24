@@ -36,7 +36,7 @@ COrbit::COrbit()
 
 	// Start with one pokestop & one pokemon
 	mEmissions.push_back(make_shared<CPokestop>(this));
-
+	
 	switch (rand() % 3)
 	{
 	case 0:
@@ -49,6 +49,7 @@ COrbit::COrbit()
 		mEmissions.push_back(make_shared<CCharmander>(this));
 		break;
 	}
+	
 }
 
 
@@ -369,11 +370,6 @@ bool COrbit::Caught(std::shared_ptr<CEmission> item)
 {
 	for (auto other : mEmissions)
 	{
-		// Do not compare to ourselves
-		if (other == item) {
-			continue;
-		}
-
 		if (other->IsPokemon())
 		{
 			auto loc = find(begin(mEmissions), end(mEmissions), item);
