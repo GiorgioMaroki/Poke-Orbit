@@ -45,6 +45,10 @@ public:
 	/// Updates emission animation (overridable)
 	virtual void UpdateTime(double elapsed) {};
 
+	/// Updates the time until a pokestop dissapears
+	virtual double TimerUpdate(double elapsed) { return 0; }
+
+
 	/// Draws emission
 	void Draw(Gdiplus::Graphics * graphics);
 

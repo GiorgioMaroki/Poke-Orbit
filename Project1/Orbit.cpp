@@ -150,7 +150,6 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
 	for (auto pokeball : mMovePokeballs)
 	{
 		pokeball->Draw(graphics);
-
 	}
 }
 
@@ -162,13 +161,27 @@ void COrbit::OnDraw(Gdiplus::Graphics *graphics, int width, int height)
  */
 void COrbit::Update(double elapsed)
 {
+	vector<shared_ptr<CEmission> > Deletes;
 	for (auto emission : mEmissions)
 	{
-		emission->Update(elapsed);
-		if (!emission->IsPokemon())
+		if (emission->IsPokemon())
 		{
-			emission->UpdateTime(elapsed);
+			emission->Update(elapsed);
 		}
+		else if (!(emission->IsPokemon()))
+		{
+			emission->Update(elapsed);
+			emission->UpdateTime(elapsed);
+			double TotalTime = abs(emission->TimerUpdate(elapsed));
+			if (TotalTime > 60)
+			{
+				Deletes.push_back(emission);
+			}
+		}
+	}
+	for (auto emission : Deletes)
+	{
+		RemoveEmission(emission);
 	}
 
 	// add elapsed to total time elapsed
@@ -178,7 +191,7 @@ void COrbit::Update(double elapsed)
 	if (mTimeElapsed > mNextSpawn)
 	{
 		mTimeElapsed = 0;
-		mNextSpawn = rand() % 8 + 3;
+		mNextSpawn = rand() % 2 + 3;
 
 		switch (rand() % 4)
 		{
@@ -314,17 +327,17 @@ void COrbit::MovetoFront(std::shared_ptr<CItem> item)
 
 
 /**
- * Removes item from orbit
+ * Removes emission from orbit
  *
- * \param item Item to remove from orbit
+ * \param emission Emission to remove from orbit
  * \returns true Whether item is removed
  */
-bool COrbit::RemoveItem(std::shared_ptr<CItem> item)
+bool COrbit::RemoveEmission(std::shared_ptr<CEmission> emission)
 {
-	auto loc = find(begin(mItems), end(mItems), item);
-	if (loc != end(mItems))
+	auto loc = find(begin(mEmissions), end(mEmissions), emission);
+	if (loc != end(mEmissions))
 	{
-		mItems.erase(loc);
+		mEmissions.erase(loc);
 		return true;
 	}
 	return false;
@@ -369,11 +382,6 @@ bool COrbit::Caught(std::shared_ptr<CEmission> item)
 {
 	for (auto other : mEmissions)
 	{
-		// Do not compare to ourselves
-		if (other == item) {
-			continue;
-		}
-
 		if (other->IsPokemon())
 		{
 			auto loc = find(begin(mEmissions), end(mEmissions), item);

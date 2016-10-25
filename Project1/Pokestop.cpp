@@ -7,6 +7,12 @@
 #include "stdafx.h"
 #include "Pokestop.h"
 
+double CPokestop::TimerUpdate(double elapsed)
+{
+	mElapsed += abs(elapsed);
+	return mElapsed;
+}
+
 /**
  * Update pokestop
  *
@@ -15,13 +21,6 @@
 void CPokestop::UpdateTime(double elapsed)
 {
 	mRefresh += abs(elapsed);
-
-	// Pokestop timeout
-	if (mElapsed > 60)
-	{
-		true;
-		//mOrbit->RemoveItem(this);
-	}
 
 	// Used-pokestop timeout
 	if (mUsed && mRefresh >= 15)
@@ -63,3 +62,5 @@ void CPokestop::FlipState()
 	mUsed = !mUsed;
 	this->SetImage(mImages[mUsed]);
 }
+
+

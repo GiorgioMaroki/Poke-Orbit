@@ -42,8 +42,7 @@ public:
 	/// Move item to front
 	void MovetoFront(std::shared_ptr<CItem> item);
 
-	/// Removes item from orbit
-	bool RemoveItem(std::shared_ptr<CItem> item);
+	bool RemoveEmission(std::shared_ptr<CEmission> emission);
 
 	/// Removes pokeball from orbit
 	bool RemovePokeball(std::shared_ptr<CPokeball> ball);

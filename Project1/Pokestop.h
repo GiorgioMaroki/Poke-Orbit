@@ -35,6 +35,9 @@ public:
 	/// Virtual destructor
 	virtual ~CPokestop() {};
 
+	/// Update time until deletion
+	double TimerUpdate(double elapsed);
+
 	/// Update Pokestop
 	void UpdateTime(double elapsed);
 

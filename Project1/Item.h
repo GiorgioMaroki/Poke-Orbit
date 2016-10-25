@@ -107,5 +107,5 @@ private:
 	std::unique_ptr<Gdiplus::Bitmap> mItemImage;
 
 	/// All of the items to populate our orbit
-	std::vector<std::shared_ptr<CItem> > mItems;
+	std::vector<std::shared_ptr<CItem>> mItems ;
 };
