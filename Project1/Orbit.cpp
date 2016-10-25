@@ -36,7 +36,7 @@ COrbit::COrbit()
 
 	// Start with one pokestop & one pokemon
 	mEmissions.push_back(make_shared<CPokestop>(this));
-
+	
 	switch (rand() % 3)
 	{
 	case 0:
@@ -49,6 +49,7 @@ COrbit::COrbit()
 		mEmissions.push_back(make_shared<CCharmander>(this));
 		break;
 	}
+	
 }
 
 
