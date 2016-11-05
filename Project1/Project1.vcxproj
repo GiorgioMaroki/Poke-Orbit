@@ -225,6 +225,18 @@
     <None Include="res\Project1.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\images\bulbasaur.png" />
+    <Image Include="..\images\charmander.png" />
+    <Image Include="..\images\charmeleon.png" />
+    <Image Include="..\images\gyarados.png" />
+    <Image Include="..\images\lure.png" />
+    <Image Include="..\images\pikachu.png" />
+    <Image Include="..\images\pokeball.png" />
+    <Image Include="..\images\pokestop-used.png" />
+    <Image Include="..\images\pokestop.png" />
+    <Image Include="..\images\slowbro.png" />
+    <Image Include="..\images\stinky.png" />
+    <Image Include="..\images\zygarde.png" />
     <Image Include="res\Project1.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>

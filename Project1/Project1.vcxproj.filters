@@ -125,5 +125,41 @@
     <Image Include="res\Toolbar.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\images\bulbasaur.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\charmander.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\charmeleon.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\gyarados.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\lure.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\pikachu.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\pokeball.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\pokestop.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\pokestop-used.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\slowbro.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\stinky.png">
+      <Filter>Header Files</Filter>
+    </Image>
+    <Image Include="..\images\zygarde.png">
+      <Filter>Header Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
